@@ -1,9 +1,10 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}
-  </h1>
-  A climber's log
- </div>
+  <ul class='topnav'>
+    <li style="color:red; font-weight:800">&Xi;SC&Lambda;L&Lambda;D&Lambda;&nbsp;&nbsp;&nbsp;</li>
+    <li><a routerLinkActive='active' [routerLink]="['/home']">Home</a></li>
+    <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
+  </ul>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>

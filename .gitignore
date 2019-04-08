@@ -17,3 +17,5 @@
 # misc
 
 # System Files
+/ngEscalada/.vs/ngEscalada/v15/Server/sqlite3
+/ngEscalada/wwwroot

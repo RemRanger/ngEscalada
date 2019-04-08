@@ -1,4 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+/*@import "~bootstrap/dist/css/bootstrap.min.css";*/
+/*@import "~font-awesome/css/font-awesome.min.css";*/
+
 body
 {
   font: 15px arial, sans-serif;
@@ -17,10 +20,6 @@ h1
 table
 {
   max-width: 1000px;
-}
-
-th, td
-{
 }
 
 tr:nth-child(even)
