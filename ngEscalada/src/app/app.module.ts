@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ClimberModule } from './climbers/climber.module';
-import { LocationListComponent } from './locations/location-list.component';
-import { LocationModule } from './locations/location.module';
+import { ClimberModule } from './climber/climber.module';
+import { LocationListComponent } from './location/location-list.component';
+import { LocationModule } from './location/location.module';
 
 @NgModule({
   declarations: [
