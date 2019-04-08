@@ -2,27 +2,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
-import { IClimber } from './climber';
+import { ILocation } from './location';
 
 @Injectable({ providedIn: 'root' })
-export class ClimberService
+export class LocationService
 {
-  private climberUrl = 'http://www.remranger.com/escalada/rest/climbers.php';
+  private locationUrl = 'http://www.remranger.com/escalada/rest/locations.php';
 
   constructor(private http: HttpClient) { }
 
-  getClimbers(): Observable<IClimber[]>
+  getLocations(): Observable<ILocation[]>
   {
-    return this.http.get<IClimber[]>(this.climberUrl).pipe(
+    return this.http.get<ILocation[]>(this.locationUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }
 
-  getClimber(id: number): Observable<IClimber | undefined>
+  getLocation(id: number): Observable<ILocation | undefined>
   {
-    return this.getClimbers().pipe(
-      map((climbers: IClimber[]) => climbers.find(p => p.id === id))
+    return this.getLocations().pipe(
+      map((locations: ILocation[]) => locations.find(p => p.id === id))
     );
   }
 

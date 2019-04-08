@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ClimberModule } from './climbers/climber.module';
+import { LocationListComponent } from './locations/location-list.component';
+import { LocationModule } from './locations/location.module';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,7 @@ import { ClimberModule } from './climbers/climber.module';
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),
+    LocationModule,
     ClimberModule
   ],
   providers: [],

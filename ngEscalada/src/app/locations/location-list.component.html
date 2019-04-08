@@ -1,0 +1,24 @@
+<div align="center">
+  <h1>Locations</h1>
+  <table *ngIf='locations && locations.length'>
+    <thead>
+      <tr>
+        <th colspan="2">Location</th>
+        <th>Website</th>
+      <tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let location of locations'>
+        <td>{{location.name}}</td>
+        <td><a [routerLink]="['/locations', location.id]">Topo</a></td>
+        <td>
+          <a href="http://{{location.websiteUrl}}">{{location.websiteUrl}}</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <!--<agm-map [latitude]="latMid" [longitude]="longMid"></agm-map>-->
+
+</div>
