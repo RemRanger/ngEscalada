@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { RouteService } from './route.service';
 import { IRoute } from './route';
 
@@ -9,6 +9,7 @@ import { IRoute } from './route';
 })
 export class RouteListComponent implements OnInit
 {
+  @Input() locationId: number;
   routes: IRoute[] = [];
   errorMessage = '';
   resultPic: string;
@@ -17,8 +18,7 @@ export class RouteListComponent implements OnInit
 
   ngOnInit()
   {
-    let locationId: number = 1;
-    this.routeService.getRoutes().subscribe
+    this.routeService.getRoutes(this.locationId).subscribe
       (
         routes => this.routes = routes.filter(r => r.dateUntil == null),
         error => this.errorMessage = <any>error

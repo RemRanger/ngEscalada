@@ -7,8 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class RouteService
 {
-  //private locationUrl = 'http://www.remranger.com/escalada/rest/routes.php';
-  private locationUrl = 'http://www.remranger.com/escalada/rest/routes.php?IdLocation=1';
+  private locationUrl = 'http://www.remranger.com/escalada/rest/routes.php';
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +18,11 @@ export class RouteService
   //    catchError(this.handleError)
   //  );
   //}
-  getRoutes(): Observable<IRoute[]>
+  getRoutes(locationId: number): Observable<IRoute[]>
   {
-    return this.http.get<IRoute[]>(this.locationUrl).pipe(
+    let url: string = this.locationUrl + '?IdLocation=' + locationId;
+    return this.http.get<IRoute[]>(url).pipe
+    (
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
