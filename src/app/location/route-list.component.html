@@ -16,7 +16,7 @@
         <td>{{route.rating}}</td>
         <td>{{route.sublocation}}</td>
         <td *ngIf="route.result == 0 && route.percentage != null; else pic" style="color: red">{{route.percentage || 0}}%</td>
-        <ng-template #pic><td align="center"><img *ngIf="getResultPic(route) != null" [src]="'./assets/' + getResultPic(route)"></td></ng-template>
+        <ng-template #pic><td align="center"><img *ngIf="getResultPic(route.result) != null" [src]="'./assets/' + getResultPic(route.result)"></td></ng-template>
         <!--<td>
     <button style="width:40px" onclick="window.location='editroute.php?IdRoute=(id)"><img src="./assets/edit.png"></button>
   </td>-->

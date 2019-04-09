@@ -11,13 +11,6 @@ export class RouteService
 
   constructor(private http: HttpClient) { }
 
-  //getLocations(locationId: number): Observable<IRoute[]>
-  //{
-  //  return this.http.get<IRoute[]>(`{this.locationUrl}?IdLocation=${locationId}`).pipe(
-  //    tap(data => console.log('All: ' + JSON.stringify(data))),
-  //    catchError(this.handleError)
-  //  );
-  //}
   getRoutes(locationId: number): Observable<IRoute[]>
   {
     let url: string = this.locationUrl + '?IdLocation=' + locationId;

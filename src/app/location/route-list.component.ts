@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { RouteService } from './route.service';
 import { IRoute } from './route';
+import { Utils } from '../shared/utils';
 
 @Component({
   selector: 'esc-route-list',
@@ -25,14 +26,5 @@ export class RouteListComponent implements OnInit
       );
   }
 
-  getResultPic(route: IRoute): string
-  {
-    switch (route.result)
-    {
-      case 0: return "result-fail.png";
-      case 1: return"result-faults.png";
-      case 2: return"result-success.png";
-      default: return null;
-    }
-  }
+  getResultPic(result: number): string { return Utils.getResultPic(result); }
 }

@@ -44,14 +44,5 @@ export class ActivityListComponent implements OnInit
     return activityGroups;
   }
 
-  getResultPic(result: number): string
-  {
-    switch (result)
-    {
-      case 0: return "result-fail.png";
-      case 1: return "result-faults.png";
-      case 2: return "result-success.png";
-      default: return null;
-    }
-  }
+  getResultPic(result: number): string { return Utils.getResultPic(result); }
 }
