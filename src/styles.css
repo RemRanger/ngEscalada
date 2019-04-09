@@ -27,6 +27,11 @@ tr:nth-child(even)
   background-color: rgba(0, 0, 0, 0.1)
 }
 
+tr.noalt:nth-child(even)
+{
+  background-color: rgba(0, 0, 0, 0)
+}
+
 table.noborder, th.noborder, td.noborder
 {
   border-width: 0px;
