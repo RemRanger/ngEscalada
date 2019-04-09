@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivityService } from './activity.service';
 import { IActivity, ActivityGroup } from './activity';
+import { Utils } from '../shared/utils';
 
 @Component({
   selector: 'esc-activity-list',

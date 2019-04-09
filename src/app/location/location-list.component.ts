@@ -18,7 +18,6 @@ export class LocationListComponent implements OnInit
   midLat: number;
   midLong: number;
 
-
   constructor(private locationService: LocationService) { }
 
   ngOnInit()

@@ -10,13 +10,15 @@ import { ClimberModule } from './climber/climber.module';
 import { LocationModule } from './location/location.module';
 import { AboutComponent } from './home/about.component';
 import { ActivityListComponent } from './home/activity-list.component';
+import { LoginComponent } from './home/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    ActivityListComponent
+    ActivityListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -26,6 +28,7 @@ import { ActivityListComponent } from './home/activity-list.component';
       ([
         { path: 'home', component: HomeComponent },
         { path: 'about', component: AboutComponent },
+        { path: 'login', component: LoginComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),

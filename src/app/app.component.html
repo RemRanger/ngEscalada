@@ -6,6 +6,8 @@
     <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
+    <li *ngIf="userId != null else login">UserId: {{userId}}</li>
+    <ng-template #login><li><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li></ng-template>>
   </ul>
 
   <router-outlet></router-outlet>

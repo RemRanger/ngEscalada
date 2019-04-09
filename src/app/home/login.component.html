@@ -1,0 +1,20 @@
+<div align="center">
+  <div id="login-form">
+    <form method="post" action="http://www.remranger.com/escalada/rest/login.php">
+      <table class="noborder" align="center" width="30%" border="0">
+        <tr class="noalt">
+          <td class="noborder"><label><h1>Login</h1></label></td>
+        </tr>
+        <tr class="noalt">
+          <td class="noborder"><input type="text" name="username" placeholder="Your user name" required /></td>
+        </tr>
+        <tr class="noalt">
+          <td class="noborder"><input type="password" name="pass" placeholder="Your Password" required /></td>
+        </tr>
+      </table>
+      <br>
+      <button type="submit" name="btn-login" [routerLink]="['/home']">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <!--<a href="register.php">Register</a>-->
+    </form>
+  </div>
+</div>
