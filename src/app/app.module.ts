@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ClimberModule } from './climber/climber.module';
-import { LocationListComponent } from './location/location-list.component';
 import { LocationModule } from './location/location.module';
 
 @NgModule({

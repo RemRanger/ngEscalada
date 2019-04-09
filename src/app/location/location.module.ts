@@ -5,10 +5,11 @@ import { LocationListComponent } from './location-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { LocationDetailComponent } from './location-detail.component';
 import { LocationDetailGuard } from './location-detail.guard';
+import { RouteListComponent } from './route-list.component';
 
 @NgModule
   ({
-    declarations: [LocationListComponent, LocationDetailComponent],
+    declarations: [LocationListComponent, LocationDetailComponent, RouteListComponent],
     imports:
       [
         CommonModule,

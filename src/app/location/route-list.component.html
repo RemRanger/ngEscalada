@@ -1,0 +1,26 @@
+<div align="center">
+  <table *ngIf='routes && routes.length'>
+    <thead>
+      <tr>
+        <th colspan="2">Route</th>
+        <th>Rating</th>
+        <th align="left">Location</th>
+        <th><img src="./assets/result-finish.png"></th>
+        <!--<th></th>-->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let route of routes'>
+        <td width="16" [style.background-color]="route.color"></td>
+        <td>{{route.name}}</td>
+        <td>{{route.rating}}</td>
+        <td>{{route.sublocation}}</td>
+        <td *ngIf="route.result == 0 && route.percentage != null; else pic" style="color: red">{{route.percentage || 0}}%</td>
+        <ng-template #pic><td align="center"><img *ngIf="getResultPic(route) != null" [src]="'./assets/' + getResultPic(route)"></td></ng-template>
+        <!--<td>
+    <button style="width:40px" onclick="window.location='editroute.php?IdRoute=(id)"><img src="./assets/edit.png"></button>
+  </td>-->
+      </tr>
+    </tbody>
+  </table>
+</div>
