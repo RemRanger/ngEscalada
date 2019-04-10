@@ -11,6 +11,7 @@ import { LocationModule } from './location/location.module';
 import { AboutComponent } from './home/about.component';
 import { ActivityListComponent } from './home/activity-list.component';
 import { LoginComponent } from './home/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { LoginComponent } from './home/login.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
     RouterModule.forRoot
       ([
         { path: 'home', component: HomeComponent },

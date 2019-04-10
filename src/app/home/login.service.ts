@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class LoginService
 {
   private locationUrl = 'http://www.remranger.com/escalada/rest/login.php';
@@ -12,7 +12,9 @@ export class LoginService
 
   getUserId(userName: string, password: string): Observable<number | undefined>
   {
-    let body: any = { "username": userName, "pass": password };
+    let body = new FormData();
+    body.append('userName', userName);
+    body.append('password', password);
     return this.http.post<number>(this.locationUrl, body).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),

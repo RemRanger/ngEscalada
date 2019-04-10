@@ -1,19 +1,25 @@
 <div align="center">
-  <div id="login-form">
-    <form method="post" action="http://www.remranger.com/escalada/rest/login.php">
-      <table class="noborder" align="center" width="30%" border="0">
+  <div>
+    <form method="post" novalidate (ngSubmit)="submit(loginForm)" #loginForm="ngForm">
+      <table class="noborder" border="0">
         <tr class="noalt">
-          <td class="noborder"><label><h1>Login</h1></label></td>
+          <td class="noborder">
+            <h1>Login</h1>
+          </td>
         </tr>
         <tr class="noalt">
-          <td class="noborder"><input type="text" name="username" placeholder="Your user name" required /></td>
+          <td class="noborder">
+            <input type="text" id="userNameId" name="userName" placeholder="Your user name" required [(ngModel)]=login.userName #userNameVar="ngModel" />
+          </td>
         </tr>
         <tr class="noalt">
-          <td class="noborder"><input type="password" name="pass" placeholder="Your Password" required /></td>
+          <td class="noborder">
+            <input type="password" id="paasswordId" name="password" placeholder="Your Password" required [(ngModel)]=login.password #userNameVar="ngModel" />
+          </td>
         </tr>
       </table>
       <br>
-      <button type="submit" onsubmit="onSubmit()" name="btn-login" [routerLink]="['/home']">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <button type="submit">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <!--<a href="register.php">Register</a>-->
     </form>
   </div>
