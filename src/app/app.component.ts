@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Utils } from './shared/utils';
+import { IClimber } from './climber/climber';
 
 @Component({
   selector: 'esc-root',
@@ -8,5 +10,8 @@ import { Component } from '@angular/core';
 export class AppComponent
 {
   pageTitle = 'Escalada';
-  userId = null;
+
+  getUser(): IClimber { return Utils.getUser(); }
+
+  logout() { Utils.setUser(null); }
 }

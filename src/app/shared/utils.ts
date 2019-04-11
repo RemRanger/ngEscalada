@@ -1,3 +1,5 @@
+import { IClimber } from '../climber/climber';
+
 export class Utils
 {
   static getResultPic(result: number): string
@@ -10,4 +12,8 @@ export class Utils
       default: return null;
     }
   }
+
+  private static theUser: IClimber = null;
+  static setUser(user: IClimber) { Utils.theUser = user; }
+  static getUser(): IClimber { return Utils.theUser; }
 }

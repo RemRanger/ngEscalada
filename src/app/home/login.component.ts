@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Login } from './login';
 import { IClimber } from '../climber/climber';
+import { Utils } from '../shared/utils';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +14,9 @@ import { IClimber } from '../climber/climber';
 export class LoginComponent implements OnInit
 {
   login = new Login();
-  response: any;
   errorMessage = '';
 
-  constructor(private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) { }
 
   ngOnInit()
   {
@@ -27,10 +28,11 @@ export class LoginComponent implements OnInit
     console.log('Login: ' + JSON.stringify(loginForm.value));
     this.loginService.getUserId(loginForm.value.userName, loginForm.value.password).subscribe
       (
-        response =>
+        climber =>
         {
-          console.log(response)
-          this.response = response
+          console.log(climber);
+          Utils.setUser(climber);
+          this.router.navigateByUrl('/home');
         },
         error =>
         {
@@ -40,7 +42,7 @@ export class LoginComponent implements OnInit
         ,
         () =>
         {
-          console.log("The POST observable is now completed. response = ",  this.response);
+          console.log("The POST observable is now completed. response = ",  Utils.getUser());
         }
       );
   }

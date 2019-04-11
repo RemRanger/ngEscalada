@@ -11,8 +11,8 @@ export class LoginService
 
   constructor(private http: HttpClient) { }
 
-  
-  getUserId(userName: string, password: string): Observable<any | undefined>
+
+  getUserId(userName: string, password: string): Observable<IClimber | undefined>
   {
     let body = new FormData();
     body.append('userName', userName);

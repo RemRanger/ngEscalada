@@ -6,7 +6,15 @@
     <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
-    <li *ngIf="userId != null else login">UserId: {{userId}}</li>
+    <li class="dropdown" *ngIf="getUser() != null else login">
+      <a class="dropbtn">{{getUser().firstName}}</a>
+      <div class="dropdown-content">
+      <a>My sessions</a>
+      <a >Progress</a>
+      <a >What' s next</a>
+      <a href="#" ng-click="logout()">Logout</a>
+      </div>
+    </li>
     <ng-template #login><li><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li></ng-template>>
   </ul>
 
