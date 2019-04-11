@@ -3,17 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IRoute } from './route';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { Utils } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService
 {
-  private locationUrl = 'http://www.remranger.com/escalada/rest/routes.php';
+  private apiUrl = Utils.getApiUrl('routes');
 
   constructor(private http: HttpClient) { }
 
   getRoutes(locationId: number): Observable<IRoute[]>
   {
-    let url: string = this.locationUrl + '?IdLocation=' + locationId;
+    let url: string = this.apiUrl + '?IdLocation=' + locationId;
     return this.http.get<IRoute[]>(url).pipe
     (
       tap(data => console.log('All: ' + JSON.stringify(data))),

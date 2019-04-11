@@ -16,4 +16,9 @@ export class Utils
   private static theUser: IClimber = null;
   static setUser(user: IClimber) { Utils.theUser = user; }
   static getUser(): IClimber { return Utils.theUser; }
+
+  static getApiUrl(apiName: string): string
+  {
+    return 'http://www.remranger.com/escalada-api/' + apiName + '.php';
+  }
 }

@@ -3,17 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { IClimber } from './climber';
+import { Utils } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ClimberService
 {
-  private climberUrl = 'http://www.remranger.com/escalada/rest/climbers.php';
+  private apiUrl = Utils.getApiUrl('climbers');
 
   constructor(private http: HttpClient) { }
 
   getClimbers(): Observable<IClimber[]>
   {
-    return this.http.get<IClimber[]>(this.climberUrl).pipe(
+    return this.http.get<IClimber[]>(this.apiUrl).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

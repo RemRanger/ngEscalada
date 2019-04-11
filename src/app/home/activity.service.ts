@@ -3,17 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { IActivity } from './activity';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { Utils } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class ActivityService
 {
-  private locationUrl = 'http://www.remranger.com/escalada/rest/latest-activity.php';
+  private apiUrl = Utils.getApiUrl('latest-activity');
 
   constructor(private http: HttpClient) { }
 
   getActivities(): Observable<IActivity[]>
   {
-    return this.http.get<IActivity[]>(this.locationUrl).pipe
+    return this.http.get<IActivity[]>(this.apiUrl).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

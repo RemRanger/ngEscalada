@@ -3,11 +3,12 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { IClimber } from '../climber/climber';
+import { Utils } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService
 {
-  private locationUrl = 'http://www.remranger.com/escalada/rest/login.php';
+  private apiUrl = Utils.getApiUrl('login');
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +18,7 @@ export class LoginService
     let body = new FormData();
     body.append('userName', userName);
     body.append('password', password);
-    return this.http.post<any>(this.locationUrl, body).pipe
+    return this.http.post<any>(this.apiUrl, body).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
