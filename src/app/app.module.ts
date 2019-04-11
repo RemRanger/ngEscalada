@@ -12,6 +12,7 @@ import { AboutComponent } from './home/about.component';
 import { ActivityListComponent } from './home/activity-list.component';
 import { LoginComponent } from './home/login.component';
 import { FormsModule } from '@angular/forms';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { FormsModule } from '@angular/forms';
     FormsModule,
     RouterModule.forRoot
       ([
-        { path: 'home', component: HomeComponent },
+        { path: 'home', component: HomeComponent},
         { path: 'about', component: AboutComponent },
         { path: 'login', component: LoginComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,7 +38,7 @@ import { FormsModule } from '@angular/forms';
     LocationModule,
     ClimberModule
   ],
-  providers: [],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
