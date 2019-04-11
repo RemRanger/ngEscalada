@@ -1,13 +1,15 @@
   <div align="center">
-    <h1>Climbers</h1>
-    <table *ngIf='climbers && climbers.length'>
-      <thead>
-        <tr><th colspan="2">Climber</th></tr>
-      </thead>
-      <tbody>
-          <tr *ngFor='let climber of climbers'>
-            <td width="16" [style.background-color]="climber.gender == 'F' ? 'violet' : 'blue'"></td><td>{{climber.firstName}} {{climber.lastName}}</td>
-          </tr>
-      </tbody>
-    </table>
+  <h1>Climbers</h1>
+  <table *ngIf='climbers && climbers.length'>
+    <thead>
+      <tr><th colspan="2">Climber</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let climber of climbers'>
+        <td width="16" [style.background-color]="climber.gender == 'F' ? 'violet' : 'blue'"></td>
+        <td>{{climber.firstName}} {{climber.lastName}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <br /><a href="http://www.remranger.com/escalada-api/climbers.php">API</a>
 </div>
