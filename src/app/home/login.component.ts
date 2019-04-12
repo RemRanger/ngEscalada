@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit
 {
   login = new Login();
+  user: IClimber = null;
   errorMessage = '';
 
   constructor(private router: Router, private loginService: LoginService) { }
@@ -28,11 +29,21 @@ export class LoginComponent implements OnInit
     console.log('Login: ' + JSON.stringify(loginForm.value));
     this.loginService.getUserId(loginForm.value.userName, loginForm.value.password).subscribe
       (
-        climber =>
+        user =>
         {
-          console.log(climber);
-          Utils.setUser(climber);
-          this.router.navigateByUrl('/home');
+          this.user = user;
+          console.log(this.user);
+          if (this.user.id > 0)
+          {
+            Utils.setUser(this.user);
+            console.log("Success: userId =", this.user.id);
+            this.router.navigateByUrl('/home');
+          }
+          else
+          {
+            Utils.setUser(null);
+            console.log("Failure: userId =", this.user.id);
+          }
         },
         error =>
         {

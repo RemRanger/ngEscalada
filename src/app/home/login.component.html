@@ -18,6 +18,7 @@
           </td>
         </tr>
       </table>
+      <div style="color:red" *ngIf="user != null && user.id < 1">User name or password are incorrect.</div>
       <br>
       <button type="submit">Login</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <!--<a href="register.php">Register</a>-->
