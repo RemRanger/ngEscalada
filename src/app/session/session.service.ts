@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { IRoute } from './route';
-import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
 import { Utils } from '../shared/utils';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { tap, catchError } from 'rxjs/operators';
+import { ISession } from './session';
 
-@Injectable({ providedIn: 'root' })
-export class RouteService
+@Injectable({
+  providedIn: 'root'
+})
+export class SessionService
 {
-  private apiUrl = Utils.getApiUrl('routes');
+  private apiUrl = Utils.getApiUrl('sessions');
 
   constructor(private http: HttpClient) { }
 
-  getRoutes(locationId: number): Observable<IRoute[]>
+  getSessions(userId: number): Observable<ISession[]>
   {
-    let params = new HttpParams().set('locationId', locationId.toString());
-    return this.http.get<IRoute[]>(this.apiUrl, { params: params }).pipe
+    let params = new HttpParams().set('userId', userId.toString());
+    return this.http.get<ISession[]>(this.apiUrl, { params: params }).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

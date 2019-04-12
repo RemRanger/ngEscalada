@@ -13,6 +13,7 @@ import { ActivityListComponent } from './home/activity-list.component';
 import { LoginComponent } from './home/login.component';
 import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { SessionModule } from './session/session.module';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),
     LocationModule,
-    ClimberModule
+    ClimberModule,
+    SessionModule
   ],
   providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
   bootstrap: [AppComponent]

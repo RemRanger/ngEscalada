@@ -1,0 +1,24 @@
+<div align="center">
+  <h1>Sessions</h1>
+  <table *ngIf='sessions && sessions.length'>
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Location</th>
+        <th>With</th>
+        <th>Comment</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let session of sessions'>
+        <td>{{session.date}}</td>
+        <td>{{session.locationName}}</td>
+        <td>{{session.mates}}</td>
+        <td>{{session.comment}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br /><a href="http://www.remranger.com/escalada-api/sessions.php?userId={{userId}}">API</a>
+
+</div>

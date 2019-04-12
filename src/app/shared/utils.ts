@@ -16,6 +16,7 @@ export class Utils
   private static theUser: IClimber = null;
   static setUser(user: IClimber) { Utils.theUser = user; }
   static getUser(): IClimber { return Utils.theUser; }
+  static getUserId(): number { return Utils.theUser != null ? Utils.theUser.id : null; }
 
   static getApiUrl(apiName: string): string
   {
