@@ -3,19 +3,19 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, CanActivate, Rout
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class LocationDetailGuard implements CanActivate
+export class SessionDetailGuard implements CanActivate
 {
   constructor(private router: Router) { }
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean
   {
-    const id = +next.url[1].path;
-    // const id2 = next.paramMap.get('id');
+    const idUser = +next.url[1].path;
+    //const idSession = next.paramMap.get('id');
     // console.log(id2);
-    if (isNaN(id) || id < 1)
+    if (isNaN(idUser) || idUser < 1)
     {
       alert('Invalid product Id');
-      this.router.navigate(['/locations']);
+      this.router.navigate(['/sessions']);
       return false;
     }
     return true;

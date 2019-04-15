@@ -18,14 +18,10 @@ export class SessionListComponent implements OnInit
 
   ngOnInit()
   {
-    this.userId = Utils.getUserId();
-    if (this.userId != null)
-    {
-      this.sessionService.getSessions(this.userId).subscribe
-        (
-          sessions => this.sessions = sessions,
-          error => this.errorMessage = <any>error
-        );
-    }
+    this.sessionService.getSessions().subscribe
+      (
+        sessions => this.sessions = sessions,
+        error => this.errorMessage = <any>error
+      );
   }
 }

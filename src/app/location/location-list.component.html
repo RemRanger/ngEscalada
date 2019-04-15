@@ -10,7 +10,7 @@
     <tbody>
       <tr *ngFor='let location of locations'>
         <td>{{location.name}}</td>
-        <td><a [routerLink]="&nbsp;['/locations', location.id]">Topo&nbsp;</a></td>
+        <td><a [routerLink]="['/locations', location.id]">&nbsp;Topo&nbsp;</a></td>
         <td>
           <a href="http://{{location.websiteUrl}}">{{location.websiteUrl}}</a>
         </td>

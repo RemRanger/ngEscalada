@@ -5,11 +5,11 @@ import { LocationListComponent } from './location-list.component';
 import { AgmCoreModule } from '@agm/core';
 import { LocationDetailComponent } from './location-detail.component';
 import { LocationDetailGuard } from './location-detail.guard';
-import { RouteListComponent } from './route-list.component';
+import { RouteModule } from '../route/route.module';
 
 @NgModule
   ({
-    declarations: [LocationListComponent, LocationDetailComponent, RouteListComponent],
+    declarations: [LocationListComponent, LocationDetailComponent],
     imports:
       [
         CommonModule,
@@ -22,7 +22,8 @@ import { RouteListComponent } from './route-list.component';
               component: LocationDetailComponent
             },
           ]),
-        AgmCoreModule.forRoot({ apiKey: 'AIzaSyD11s3QW5R_71Ywy8UmdJ6LhZlaVBPkawI' })
+        AgmCoreModule.forRoot({ apiKey: 'AIzaSyD11s3QW5R_71Ywy8UmdJ6LhZlaVBPkawI' }),
+        RouteModule
       ]
   })
 export class LocationModule { }

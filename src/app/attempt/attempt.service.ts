@@ -1,38 +1,25 @@
 import { Injectable } from '@angular/core';
-import { Utils } from '../shared/utils';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { Utils } from '../shared/utils';
 import { Observable, throwError } from 'rxjs';
-import { tap, catchError, map } from 'rxjs/operators';
-import { ISession } from './session';
+import { IAttempt } from './attempt';
+import { tap, catchError } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class SessionService
+@Injectable({ providedIn: 'root' })
+export class AttemptService
 {
-  private apiUrl = Utils.getApiUrl('sessions');
+  private apiUrl = Utils.getApiUrl('attempts');
 
   constructor(private http: HttpClient) { }
 
-  getSessions(): Observable<ISession[]>
+  getAttempts(sessionId: number, userId: number): Observable<IAttempt[]>
   {
-    let userId = Utils.getUserId();
-    if (userId != null)
-    {
-      let params = new HttpParams().set('userId', userId.toString());
-      return this.http.get<ISession[]>(this.apiUrl, { params: params }).pipe
-        (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
-          catchError(this.handleError)
-        );
-    }
-  }
-
-  getSession(id: number): Observable<ISession | undefined>
-  {
-    return this.getSessions().pipe(
-      map((sessions: ISession[]) => sessions.find(p => p.id === id))
-    );
+    let params = new HttpParams().set('sessionId', sessionId.toString()).set('userId', userId.toString());
+    return this.http.get<IAttempt[]>(this.apiUrl, { params: params }).pipe
+      (
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err: HttpErrorResponse)

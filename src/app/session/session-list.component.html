@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       <tr *ngFor='let session of sessions'>
-        <td nowrap>{{session.date}}</td>
+        <td nowrap><a [routerLink]="['/sessions', session.id]">{{session.date | date: 'EEE dd-MMM-yyyy'}}</a></td>
         <td nowrap>{{session.locationName}}</td>
         <td nowrap>{{session.mates}}</td>
         <td>{{session.comment}}</td>

@@ -1,0 +1,26 @@
+<div align="center">
+  <h1>Session: {{session.date | date: 'EEE dd-MMM-yyyy'}}</h1>
+  {{session.comment}}
+  <br /><br />
+  <table class="noborder">
+    <tbody>
+      <tr>
+        <td class="noborder">Climber:</td>
+        <td class="noborder">{{user.firstName}} {{user.lastName}}</td>
+      </tr>
+      <tr>
+        <td class="noborder">With:</td>
+        <td class="noborder">{{session.mates}}</td>
+      </tr>
+      <tr>
+        <td class="noborder">At:</td>
+        <td class="noborder">{{session.locationName}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br>
+  <div>
+    <esc-attempt-list [sessionId]="session.id" [userId]="user.id"></esc-attempt-list>
+  </div>
+</div>

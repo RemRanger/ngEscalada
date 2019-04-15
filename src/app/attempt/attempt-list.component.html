@@ -1,0 +1,29 @@
+<div align="center">
+  <table *ngIf='attempts && attempts.length'>
+    <thead>
+      <tr>
+        <th colspan="2">Route</th>
+        <th align="left">Type</th>
+        <th>Rating</th>
+        <th align="left">Location</th>
+        <th></th>
+        <th width="16"><img src="./assets/result-finish.png"></th>
+        <th>Comment</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let attempt of attempts'>
+        <td width="16" [style.background-color]="attempt.routeColor"></td>
+        <td nowrap>{{attempt.routeName}}</td>
+        <td nowrap>{{attempt.routeType}}</td>
+        <td nowrap>{{attempt.routeRating}}</td>
+        <td nowrap>{{attempt.routeSublocation}}</td>
+        <td width="16px"></td>
+        <td width="40" style="white-space: nowrap;color: red" *ngIf="attempt.result == 0 && attempt.percentage != null; else pic">{{attempt.percentage || 0}}%</td>
+        <ng-template #pic><td width="40" style="white-space: nowrap" align="center"><img *ngIf="getResultPic(attempt.result) != null" [src]="'./assets/' + getResultPic(attempt.result)"></td></ng-template>
+        <td>{{attempt.comment}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

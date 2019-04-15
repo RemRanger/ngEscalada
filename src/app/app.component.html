@@ -9,7 +9,7 @@
     <li class="dropdown" *ngIf="getUser() != null else login">
       <a class="dropbtn">{{getUser().firstName}}</a>
       <div class="dropdown-content">
-        <a [routerLink]="&nbsp;['/sessions', getUser().id]">My sessions</a>
+        <a [routerLink]="&nbsp;['/sessions']">My sessions</a>
         <!--<a>Progress</a>
         <a>What' s next</a>-->
         <a href ="" ng-click="logout()">Logout</a>
