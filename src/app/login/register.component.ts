@@ -21,15 +21,6 @@ export class RegisterComponent implements OnInit
 
   ngOnInit()
   {
-    //TMP
-    this.user.firstName = "Jack";
-    this.user.lastName = "Jones";
-    this.user.gender = "M";
-    this.user.email = "jack@cat.com";
-    this.user.userName = "jas";
-    this.user.password = "abc";
-    this.user.passwordMatch = "abc";
-    //tmp
   }
 
   submit(registerForm: NgForm)
