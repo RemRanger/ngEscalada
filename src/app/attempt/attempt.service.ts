@@ -12,6 +12,15 @@ export class AttemptService
 
   constructor(private http: HttpClient) { }
 
+  getAllAttempts(): Observable<IAttempt[]>
+  {
+    return this.http.get<IAttempt[]>(this.apiUrl).pipe
+      (
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
   getAttempts(sessionId: number, userId: number): Observable<IAttempt[]>
   {
     let params = new HttpParams().set('sessionId', sessionId.toString()).set('userId', userId.toString());

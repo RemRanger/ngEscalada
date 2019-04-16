@@ -12,4 +12,17 @@ export interface IAttempt
   routeSublocation: string;
   routeDateUntil: Date;
   routePictureFileName: string;
+  locationName: string;
+  sessionId: number;
+  sessionDate: string;
+  userId: number;
+  userFirstName: string;
+  userLastName: string;
+}
+
+export class AttemptGroup
+{
+  sessionId: number;
+  userId: number;
+  attempts: IAttempt[] = [];
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivityService } from './activity.service';
-import { IActivity, ActivityGroup } from './activity';
 import { Utils } from '../shared/utils';
+import { AttemptService } from '../attempt/attempt.service';
+import { IAttempt, AttemptGroup } from '../attempt/attempt';
 
 @Component({
   selector: 'esc-activity-list',
@@ -10,39 +10,39 @@ import { Utils } from '../shared/utils';
 })
 export class ActivityListComponent implements OnInit
 {
-  activities: IActivity[] = [];
+  attempts: IAttempt[] = [];
   errorMessage = '';
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private attemptService: AttemptService) { }
 
   ngOnInit()
   {
-    this.activityService.getActivities().subscribe
+    this.attemptService.getAllAttempts().subscribe
       (
-        activities => this.activities = activities,
+        attempts => this.attempts = attempts,
         error => this.errorMessage = <any>error
       );
   }
 
-  getActivityGroups(): ActivityGroup[]
+  getAttemptGroups(): AttemptGroup[]
   {
-    let activityGroups: ActivityGroup[] = [];
+    let attemptGroups: AttemptGroup[] = [];
     let lastSessionId: number = null
-    let activityGroup: ActivityGroup;
-    for (let activity of this.activities.sort((a, b) => { return b.sessionId - a.sessionId }))
+    let attemptGroup: AttemptGroup;
+    for (let attempt of this.attempts.sort((a, b) => { return b.sessionId - a.sessionId }))
     {
-      if (activityGroup == null  || lastSessionId == null || activity.sessionId != lastSessionId)
+      if (attemptGroup == null  || lastSessionId == null || attempt.sessionId != lastSessionId)
       {
-        activityGroup = new ActivityGroup()
-        activityGroup.sessionId = activity.sessionId;
-        activityGroup.userId = activity.userId;
-        activityGroups.push(activityGroup);
+        attemptGroup = new AttemptGroup()
+        attemptGroup.sessionId = attempt.sessionId;
+        attemptGroup.userId = attempt.userId;
+        attemptGroups.push(attemptGroup);
       }
-      activityGroup.activities.push(activity);
+      attemptGroup.attempts.push(attempt);
 
-      lastSessionId = activity.sessionId;
+      lastSessionId = attempt.sessionId;
     }
-    return activityGroups;
+    return attemptGroups;
   }
 
   getResultPic(result: number): string { return Utils.getResultPic(result); }
