@@ -23,5 +23,7 @@ export class SessionListComponent implements OnInit
         sessions => this.sessions = sessions,
         error => this.errorMessage = <any>error
       );
+
+    this.userId = Utils.getUserId();
   }
 }

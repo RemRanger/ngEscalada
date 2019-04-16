@@ -20,6 +20,6 @@ export class Utils
 
   static getApiUrl(apiName: string): string
   {
-    return 'http://www.remranger.com/escalada-api/' + apiName + '.php';
+    return 'https://www.remranger.com/escalada-api/' + apiName + '.php';
   }
 }
