@@ -1,20 +1,52 @@
 <div align="center">
-    <form method="post" (ngSubmit)="submit(registerForm)" #registerForm="ngForm">
-      <table class="noborder" border="0">
-        <tr class="noalt"><td class="noborder"><label><h1>Register</h1></label></td></tr>
-        <tr class="noalt">
-          <td class="noborder">
-            <input type="text" id="firstNameId" name="firstName" placeholder="First Name" required=required [(ngModel)]="user.firstName" #firstNameVar="ngModel" [ngClass]="{'is-invalid': firstNameVar.touched && !firstNameVar.valid}" />
-          </td>
-        </tr>
-        <div style="color:red" *ngIf="user != null && user.id < 1">User name or password are incorrect.</div>
-        <tr class="noalt"><td class="noborder"><input type="text" name="lname" placeholder="Last Name" required=required /></td></tr>
-        <tr class="noalt"><td class="noborder"><input type="radio" name="gender" value="M" required=required />Male&nbsp;&nbsp;<input type="radio" name="gender" value="F" required=required />Female</td></tr>
-        <tr class="noalt"><td class="noborder"><input type="email" name="email" placeholder="Your Email" required=required /></td></tr>
-        <tr class="noalt"><td class="noborder"><input type="text" name="uname" placeholder="User Name" required=required /></td></tr>
-        <tr class="noalt"><td class="noborder"><input type="password" name="pass" placeholder="Your Password" required=required /></td></tr>
-      </table>
-      <br />
-      <button type="submit">Register</button>
-    </form>
+  <form method="post" (ngSubmit)="submit(registerForm)" #registerForm="ngForm">
+    <table class="noborder" border="0">
+      <tr class="noalt"><td class="noborder"><label><h1>Register</h1></label></td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="text" id="firstNameId" size="30" name="firstName" placeholder="First Name" required [(ngModel)]="user.firstName" #firstName="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(firstName.touched || firstName.dirty) && !firstName.valid "><td style="color:red;font-size-adjust:0.4">Please enter your first name.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="text" id="lastNameId" size="30" name="lastName" placeholder="Last Name" required [(ngModel)]="user.lastName" #lastName="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(lastName.touched || lastName.dirty) && !lastName.valid "><td style="color:red;font-size-adjust:0.4">Please enter your last name.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="radio" id="genderId" name="gender" value="M" required [(ngModel)]="user.gender" #gender="ngModel" />Male&nbsp;&nbsp;
+          <input type="radio" id="genderId" name="gender" value="F" required [(ngModel)]="user.gender" #gender="ngModel" />Female
+        </td>
+      </tr>
+      <tr *ngIf="(gender.touched || gender.dirty) && !gender.valid "><td style="color:red;font-size-adjust:0.4">Please select your gender.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="email" id="emailId" size="30" name="email" placeholder="Your Email" required [(ngModel)]="user.email" #email="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(email.touched || email.dirty) && !email.valid "><td style="color:red;font-size-adjust:0.4">Please enter your email address.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="text" size="20" id="userNameId" name="userName" placeholder="User Name" required [(ngModel)]="user.userName" #userName="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(userName.touched || userName.dirty) && !userName.valid "><td style="color:red;font-size-adjust:0.4">Please enter your user name.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="password" id="passwordId" size="30" name="password" placeholder="Your Password" required [(ngModel)]="user.password" #password="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(password.touched || password.dirty) && !password.valid "><td style="color:red;font-size-adjust:0.4">Please choose a password.</td></tr>
+      <tr class="noalt">
+        <td class="noborder">
+          <input type="password" id="passwordMatchId" size="30" name="passwordMatch" placeholder="Your Password (again)" required [(ngModel)]="user.passwordMatch" #passwordMatch="ngModel" />
+        </td>
+      </tr>
+      <tr *ngIf="(password.touched || password.dirty) && (passwordMatch.touched || passwordMatch.dirty) && password.value != passwordMatch.value"><td style="color:red;font-size-adjust:0.4">Passwords do not match.</td></tr>
+    </table>
+    <br />
+    <button type="submit" [disabled]="!registerForm.valid || password.value != passwordMatch.value">Register</button>
+  </form>
 </div>

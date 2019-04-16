@@ -9,15 +9,32 @@ import { Utils } from '../shared/utils';
 export class LoginService
 {
   apiUrl = Utils.getApiUrl('login');
+  apiUrlRegister = Utils.getApiUrl('register');
 
   constructor(private http: HttpClient) { }
-  
-  getUserId(userName: string, password: string): Observable<User | undefined>
+
+  getUser(userName: string, password: string): Observable<User | undefined>
   {
     let body = new FormData();
     body.append('userName', userName);
     body.append('password', password);
     return this.http.post<any>(this.apiUrl, body).pipe
+      (
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
+  }
+
+  appendUser(user: User): Observable<User | undefined>
+  {
+    let body = new FormData();
+    body.append('firstName', user.firstName);
+    body.append('lastName', user.lastName);
+    body.append('gender', user.gender);
+    body.append('email', user.email);
+    body.append('password', user.password);
+    body.append('userName', user.userName);
+    return this.http.post<any>(this.apiUrlRegister, body).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
