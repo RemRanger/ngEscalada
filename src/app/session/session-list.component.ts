@@ -26,4 +26,6 @@ export class SessionListComponent implements OnInit
 
     this.userId = Utils.getUserId();
   }
+
+  getApiUrl(): string { return this.sessionService.apiUrl; }
 }

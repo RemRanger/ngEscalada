@@ -8,11 +8,10 @@ import { Utils } from '../shared/utils';
 @Injectable({ providedIn: 'root' })
 export class LoginService
 {
-  private apiUrl = Utils.getApiUrl('login');
+  apiUrl = Utils.getApiUrl('login');
 
   constructor(private http: HttpClient) { }
-
-
+  
   getUserId(userName: string, password: string): Observable<IClimber | undefined>
   {
     let body = new FormData();

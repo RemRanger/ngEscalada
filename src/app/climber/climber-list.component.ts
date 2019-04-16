@@ -21,4 +21,6 @@ export class ClimberListComponent implements OnInit
       error => this.errorMessage = <any>error
     );
   }
+
+  getApiUrl(): string { return this.climberService.apiUrl; }
 }

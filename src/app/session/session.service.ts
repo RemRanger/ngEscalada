@@ -5,12 +5,10 @@ import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { ISession } from './session';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SessionService
 {
-  private apiUrl = Utils.getApiUrl('sessions');
+  apiUrl = Utils.getApiUrl('sessions');
 
   constructor(private http: HttpClient) { }
 

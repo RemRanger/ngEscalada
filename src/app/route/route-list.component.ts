@@ -27,4 +27,6 @@ export class RouteListComponent implements OnInit
   }
 
   getResultPic(result: number): string { return Utils.getResultPic(result); }
+
+  getApiUrl(): string { return this.routeService.apiUrl; }
 }

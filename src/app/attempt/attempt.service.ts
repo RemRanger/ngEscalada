@@ -8,7 +8,7 @@ import { tap, catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AttemptService
 {
-  private apiUrl = Utils.getApiUrl('attempts');
+  apiUrl = Utils.getApiUrl('attempts');
 
   constructor(private http: HttpClient) { }
 

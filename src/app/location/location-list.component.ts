@@ -43,4 +43,6 @@ export class LocationListComponent implements OnInit
       this.midLong = (this.maxLong - this.minLong) / 2;
     }
   }
+
+  getApiUrl(): string { return this.locationService.apiUrl; }
 }

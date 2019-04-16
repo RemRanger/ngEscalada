@@ -8,7 +8,7 @@ import { Utils } from '../shared/utils';
 @Injectable({ providedIn: 'root' })
 export class LocationService
 {
-  private apiUrl = Utils.getApiUrl('locations');
+  apiUrl = Utils.getApiUrl('locations');
 
   constructor(private http: HttpClient) { }
 

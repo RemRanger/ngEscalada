@@ -8,7 +8,7 @@ import { Utils } from '../shared/utils';
 @Injectable({ providedIn: 'root' })
 export class ClimberService
 {
-  private apiUrl = Utils.getApiUrl('climbers');
+  apiUrl = Utils.getApiUrl('climbers');
 
   constructor(private http: HttpClient) { }
 
