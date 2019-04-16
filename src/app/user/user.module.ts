@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { ClimberListComponent } from './climber-list.component';
+import { UserListComponent } from './user-list.component';
 
 @NgModule
 ({
-  declarations: [ClimberListComponent],
+  declarations: [UserListComponent],
   imports:
   [
       CommonModule,
       RouterModule.forChild
       ([
-        { path: 'climbers', component: ClimberListComponent }
+        { path: 'climbers', component: UserListComponent }
       ])
   ]
 })
-export class ClimberModule { }
+export class UserModule { }

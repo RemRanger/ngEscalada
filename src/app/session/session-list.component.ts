@@ -2,7 +2,6 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ISession } from './session';
 import { SessionService } from './session.service';
 import { Utils } from '../shared/utils';
-import { IClimber } from '../climber/climber';
 
 @Component({
   templateUrl: './session-list.component.html',

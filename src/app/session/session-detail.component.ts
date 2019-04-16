@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ISession } from './session';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from './session.service';
-import { IClimber } from '../climber/climber';
+import { User } from '../user/user';
 import { Utils } from '../shared/utils';
 
 @Component({
@@ -13,7 +13,7 @@ import { Utils } from '../shared/utils';
 export class SessionDetailComponent implements OnInit
 {
   session: ISession | undefined;
-  user: IClimber;
+  user: User;
   errorMessage = '';
 
   constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService) { }

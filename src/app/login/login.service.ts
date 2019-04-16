@@ -1,30 +1,27 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap, map } from 'rxjs/operators';
-import { IClimber } from './climber';
+import { tap, catchError, map } from 'rxjs/operators';
+import { User } from '../user/user';
 import { Utils } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
-export class ClimberService
+export class LoginService
 {
-  apiUrl = Utils.getApiUrl('climbers');
+  apiUrl = Utils.getApiUrl('login');
 
   constructor(private http: HttpClient) { }
-
-  getClimbers(): Observable<IClimber[]>
+  
+  getUserId(userName: string, password: string): Observable<User | undefined>
   {
-    return this.http.get<IClimber[]>(this.apiUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
-      catchError(this.handleError)
-    );
-  }
-
-  getClimber(id: number): Observable<IClimber | undefined>
-  {
-    return this.getClimbers().pipe(
-      map((climbers: IClimber[]) => climbers.find(p => p.id === id))
-    );
+    let body = new FormData();
+    body.append('userName', userName);
+    body.append('password', password);
+    return this.http.post<any>(this.apiUrl, body).pipe
+      (
+        tap(data => console.log('All: ' + JSON.stringify(data))),
+        catchError(this.handleError)
+      );
   }
 
   private handleError(err: HttpErrorResponse)

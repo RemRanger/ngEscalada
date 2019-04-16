@@ -6,23 +6,22 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { ClimberModule } from './climber/climber.module';
+import { UserModule } from './user/user.module';
 import { LocationModule } from './location/location.module';
 import { AboutComponent } from './home/about.component';
-import { LoginComponent } from './home/login.component';
 import { FormsModule } from '@angular/forms';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SessionModule } from './session/session.module';
 import { AttemptModule } from './attempt/attempt.module';
 import { ActivityListComponent } from './home/activity-list.component';
+import { LoginModule } from './login/login.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     AboutComponent,
-    ActivityListComponent,
-    LoginComponent
+    ActivityListComponent
   ],
   imports: [
     BrowserModule,
@@ -33,12 +32,12 @@ import { ActivityListComponent } from './home/activity-list.component';
       ([
         { path: 'home', component: HomeComponent},
         { path: 'about', component: AboutComponent },
-        { path: 'login', component: LoginComponent },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),
     LocationModule,
-    ClimberModule,
+    UserModule,
+    LoginModule,
     SessionModule,
     AttemptModule
   ],

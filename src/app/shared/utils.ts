@@ -1,4 +1,4 @@
-import { IClimber } from '../climber/climber';
+import { User } from '../user/user';
 
 export class Utils
 {
@@ -13,9 +13,9 @@ export class Utils
     }
   }
 
-  private static theUser: IClimber /*= { id: 1, firstName: "TEST", lastName: "USER", gender: "M" }*/;//TMP
-  static setUser(user: IClimber) { Utils.theUser = user; }
-  static getUser(): IClimber { return Utils.theUser; }
+  private static theUser: User /*= { id: 1, firstName: "TEST", lastName: "USER", gender: "M" }*/;//TMP
+  static setUser(user: User) { Utils.theUser = user; }
+  static getUser(): User { return Utils.theUser; }
   static getUserId(): number { return Utils.theUser != null ? Utils.theUser.id : null; }
 
   static getApiUrl(apiName: string): string

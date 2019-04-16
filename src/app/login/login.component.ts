@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Login } from './login';
-import { IClimber } from '../climber/climber';
+import { User } from '../user/user';
 import { Utils } from '../shared/utils';
 import { Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit
 {
   login = new Login();
-  user: IClimber = null;
+  user: User = null;
   errorMessage = '';
 
   constructor(private router: Router, private loginService: LoginService) { }

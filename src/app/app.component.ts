@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Utils } from './shared/utils';
-import { IClimber } from './climber/climber';
+import { User } from './user/user';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ export class AppComponent
 {
   pageTitle = 'Escalada';
 
-  getUser(): IClimber { return Utils.getUser(); }
+  getUser(): User { return Utils.getUser(); }
 
   logout()
   {
