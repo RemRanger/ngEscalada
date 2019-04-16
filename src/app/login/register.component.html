@@ -33,6 +33,7 @@
         </td>
       </tr>
       <tr *ngIf="(userName.touched || userName.dirty) && !userName.valid "><td style="color:red;font-size-adjust:0.4">Please enter your user name.</td></tr>
+      <tr *ngIf="isDuplicate"><td style="color:red;font-size-adjust:0.4">User with user name '{{duplicateUserName}}' already exists.</td></tr>
       <tr class="noalt">
         <td class="noborder">
           <input type="password" id="passwordId" size="30" name="password" placeholder="Your Password" required [(ngModel)]="user.password" #password="ngModel" />

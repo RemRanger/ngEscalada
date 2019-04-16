@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit
   user = new User();
   response: any;
   errorMessage = '';
+  isDuplicate: boolean = false;
+  duplicateUserName: string;
 
   constructor(private router: Router, private loginService: LoginService) { }
 
@@ -39,11 +41,18 @@ export class RegisterComponent implements OnInit
         response =>
         {
           this.response = response;
+          this.isDuplicate = false;
           console.log(this.response);
           if (this.response.id > 0)
           {
             console.log("Success: new user id =", this.response.id);
             this.router.navigateByUrl('/login');
+          }
+          else if (this.response.id == -1)
+          {
+            this.isDuplicate = true;
+            this.duplicateUserName = registerForm.value.userName;
+            console.log("Failure: user with user name '" + registerForm.value.userName + "' already exists.");
           }
           else
           {
