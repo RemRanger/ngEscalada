@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit
           {
             Utils.setUser(this.user);
             console.log("Success: userId =", this.user.id);
-            this.router.navigateByUrl('/home');
+            this.router.navigateByUrl('/sessions');
           }
           else
           {

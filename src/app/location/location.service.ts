@@ -15,7 +15,7 @@ export class LocationService
   getLocations(): Observable<ILocation[]>
   {
     return this.http.get<ILocation[]>(this.apiUrl).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      //tap(data => console.log('Locations: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }

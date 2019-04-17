@@ -5,12 +5,15 @@ import { SessionListComponent } from './session-list.component';
 import { SessionDetailComponent } from './session-detail.component';
 import { SessionDetailGuard } from './session-detail.guard';
 import { AttemptModule } from '../attempt/attempt.module';
+import { SessionEditComponent } from './session-edit.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
-  declarations: [SessionListComponent, SessionDetailComponent],
+  declarations: [SessionListComponent, SessionDetailComponent, SessionEditComponent],
   imports:
     [
       CommonModule,
+      SharedModule,
       RouterModule.forChild
         ([
           { path: 'sessions', component: SessionListComponent },
@@ -19,6 +22,7 @@ import { AttemptModule } from '../attempt/attempt.module';
             canActivate: [SessionDetailGuard],
             component: SessionDetailComponent
           },
+          { path: 'session-edit/:id/:userId', component: SessionEditComponent }
         ]),
       AttemptModule
     ]

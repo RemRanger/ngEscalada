@@ -3,7 +3,7 @@ import { Utils } from '../shared/utils';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
-import { ISession } from './session';
+import { Session } from './session';
 
 @Injectable({ providedIn: 'root' })
 export class SessionService
@@ -12,23 +12,23 @@ export class SessionService
 
   constructor(private http: HttpClient) { }
 
-  getSessions(userId: number): Observable<ISession[]>
+  getSessions(userId: number): Observable<Session[]>
   {
     if (userId != null)
     {
       let params = new HttpParams().set('userId', userId.toString());
-      return this.http.get<ISession[]>(this.apiUrl, { params: params }).pipe
+      return this.http.get<Session[]>(this.apiUrl, { params: params }).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          //tap(data => console.log('Sessions: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }
   }
 
-  getSession(id: number, userId: number): Observable<ISession | undefined>
+  getSession(id: number, userId: number): Observable<Session | undefined>
   {
     return this.getSessions(userId).pipe(
-      map((sessions: ISession[]) => sessions.find(p => p.id === id))
+      map((sessions: Session[]) => sessions.find(p => p.id === id))
     );
   }
 

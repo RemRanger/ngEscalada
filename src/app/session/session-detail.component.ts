@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ISession } from './session';
+import { Session } from './session';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from './session.service';
 import { User } from '../user/user';
@@ -13,7 +13,7 @@ import { UserService } from '../user/user.service';
 })
 export class SessionDetailComponent implements OnInit
 {
-  session: ISession | undefined;
+  session: Session | undefined;
   user: User;
   errorMessage = '';
 

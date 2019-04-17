@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ISession } from './session';
+import { Session } from './session';
 import { SessionService } from './session.service';
 import { Utils } from '../shared/utils';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './session-list.component.html',
@@ -9,11 +10,11 @@ import { Utils } from '../shared/utils';
 })
 export class SessionListComponent implements OnInit
 {
-  sessions: ISession[] = [];
+  sessions: Session[] = [];
   errorMessage = '';
   userId: number;
 
-  constructor(private sessionService: SessionService) { }
+  constructor(private sessionService: SessionService, private router: Router) { }
 
   ngOnInit()
   {
@@ -27,4 +28,9 @@ export class SessionListComponent implements OnInit
   }
 
   getApiUrl(): string { return this.sessionService.apiUrl; }
+
+  addSession()
+  {
+    this.router.navigate(['/session-edit', 0, this.userId]);
+  }
 }

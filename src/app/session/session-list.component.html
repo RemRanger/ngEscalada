@@ -1,5 +1,6 @@
 <div align="center">
-  <h1>Sessions</h1>
+  <h1>My Sessions</h1>
+  <button (click)="addSession()">Add session</button>
   <table *ngIf='sessions && sessions.length'>
     <thead>
       <tr>
@@ -15,6 +16,7 @@
         <td nowrap>{{session.locationName}}</td>
         <td nowrap>{{session.mates}}</td>
         <td>{{session.comment}}</td>
+        <td><a [routerLink]="['/session-edit', session.id, userId]"><img src="./assets/edit.png"></a></td>
       </tr>
     </tbody>
   </table>

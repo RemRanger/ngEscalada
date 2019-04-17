@@ -1,0 +1,9 @@
+<select id="Year" name="Year" required>
+  <option *ngFor="let year of getYears()" [value]="year" [selected]="year == selectedYear">{{year}}</option>' ;
+</select>
+<select id="Month" name="Month" required>
+  <option *ngFor="let month of getMonths()" [value]="month" [selected]="month == selectedMonth">{{getMonthName(month)}}</option>' ;
+</select>
+<select id="Day" name="Day">
+  <option *ngFor="let day of getDays()" [value]="day" [selected]="day == selectedDay">{{day}}</option>' ;
+</select>

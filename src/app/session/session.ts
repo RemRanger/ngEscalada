@@ -1,4 +1,4 @@
-export interface ISession
+export class Session
 {
   id: number;
   comment: string;
@@ -6,4 +6,5 @@ export interface ISession
   locationId: number;
   locationName: string;
   mates: string;
+  mateIds: string;
 }
