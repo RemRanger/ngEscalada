@@ -15,7 +15,7 @@ import { AttemptModule } from '../attempt/attempt.module';
         ([
           { path: 'sessions', component: SessionListComponent },
           {
-            path: 'sessions/:id',
+            path: 'sessions/:id/:userId',
             canActivate: [SessionDetailGuard],
             component: SessionDetailComponent
           },

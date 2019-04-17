@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SessionService } from './session.service';
 import { User } from '../user/user';
 import { Utils } from '../shared/utils';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-session-detail',
@@ -16,30 +17,39 @@ export class SessionDetailComponent implements OnInit
   user: User;
   errorMessage = '';
 
-  constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private sessionService: SessionService, private userService: UserService) { }
 
   ngOnInit()
   {
-    const param = this.route.snapshot.paramMap.get('id');
-    if (param)
+    const paramId = this.route.snapshot.paramMap.get('id');
+    const paramUserId = this.route.snapshot.paramMap.get('userId');
+    if (paramId && paramUserId)
     {
-      const id = +param;
-      this.getSession(id);
+      const id = +paramId;
+      const userId = +paramUserId;
+      this.getSession(id, userId);
+      this.getUser(userId)
     }
-
-    this.user = Utils.getUser();
   }
 
-  getSession(id: number)
+  getSession(id: number, userId: number)
   {
-    this.sessionService.getSession(id).subscribe
-    (
-      session => this.session = session,
-      error => this.errorMessage = <any>error);
+    this.sessionService.getSession(id, userId).subscribe
+      (
+        session => this.session = session,
+        error => this.errorMessage = <any>error);
+  }
+
+  getUser(userId: number)
+  {
+    this.userService.getUser(userId).subscribe
+      (
+        user => this.user = user,
+        error => this.errorMessage = <any>error);
   }
 
   onBack(): void
   {
-    this.router.navigate(['/sessions']);
+    this.router.navigate(['/home']);
   }
 }

@@ -17,13 +17,13 @@ export class SessionListComponent implements OnInit
 
   ngOnInit()
   {
-    this.sessionService.getSessions().subscribe
+    this.userId = Utils.getUserId();
+    this.sessionService.getSessions(this.userId).subscribe
       (
         sessions => this.sessions = sessions,
         error => this.errorMessage = <any>error
       );
 
-    this.userId = Utils.getUserId();
   }
 
   getApiUrl(): string { return this.sessionService.apiUrl; }

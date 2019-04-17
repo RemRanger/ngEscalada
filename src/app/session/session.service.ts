@@ -12,9 +12,8 @@ export class SessionService
 
   constructor(private http: HttpClient) { }
 
-  getSessions(): Observable<ISession[]>
+  getSessions(userId: number): Observable<ISession[]>
   {
-    let userId = Utils.getUserId();
     if (userId != null)
     {
       let params = new HttpParams().set('userId', userId.toString());
@@ -26,9 +25,9 @@ export class SessionService
     }
   }
 
-  getSession(id: number): Observable<ISession | undefined>
+  getSession(id: number, userId: number): Observable<ISession | undefined>
   {
-    return this.getSessions().pipe(
+    return this.getSessions(userId).pipe(
       map((sessions: ISession[]) => sessions.find(p => p.id === id))
     );
   }

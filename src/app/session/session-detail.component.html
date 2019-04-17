@@ -4,15 +4,15 @@
   <br /><br />
   <table class="noborder">
     <tbody>
-      <tr>
+      <tr class="noalt">
         <td class="noborder">Climber:</td>
         <td class="noborder">{{user.firstName}} {{user.lastName}}</td>
       </tr>
-      <tr>
+      <tr class="noalt">
         <td class="noborder">With:</td>
         <td class="noborder">{{session.mates}}</td>
       </tr>
-      <tr>
+      <tr class="noalt">
         <td class="noborder">At:</td>
         <td class="noborder">{{session.locationName}}</td>
       </tr>
@@ -23,4 +23,7 @@
   <div>
     <esc-attempt-list [sessionId]="session.id" [userId]="user.id"></esc-attempt-list>
   </div>
+  <!--<div>
+    <br /><button style="width:100px" (click)="onBack()">Back</button>
+  </div>-->
 </div>
