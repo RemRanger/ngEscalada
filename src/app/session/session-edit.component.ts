@@ -34,7 +34,11 @@ export class SessionEditComponent implements OnInit
       {
         this.sessionService.getSession(id, userId).subscribe
           (
-            session => this.session = session,
+            session =>
+            {
+              this.session = session;
+              this.session.partnerIds = this.getMateIdArray(this.session.partnerIdsAsString);
+            },
             error => this.errorMessage = <any>error
           );
       }
@@ -64,9 +68,9 @@ export class SessionEditComponent implements OnInit
 
   hasMate(userId: number): boolean
   {
-    if (this.session.mateIds)
+    if (this.session.partnerIdsAsString)
     {
-      let mateIdArray: string[] = this.session.mateIds.toString().split(",");
+      let mateIdArray: string[] = this.session.partnerIdsAsString.toString().split(",");
       return mateIdArray.indexOf(userId.toString()) >= 0;
     }
     else
@@ -105,5 +109,16 @@ export class SessionEditComponent implements OnInit
           console.log("The POST observable is now completed. response = ", this.response);
         }
       );
+  }
+
+  private getMateIdArray(mateIds: string): number[]
+  {
+    let ids: number[] = [];
+
+    let idStrings: string[] = mateIds.toString().split(",");
+    for (let idString of idStrings)
+      ids.push(+idString);
+
+    return ids;
   }
 }

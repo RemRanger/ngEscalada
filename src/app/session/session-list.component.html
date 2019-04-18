@@ -15,7 +15,7 @@
         <tr *ngFor='let session of sessions'>
           <td nowrap><a [routerLink]="['/sessions', session.id, userId]">{{session.date | date: 'EEE dd-MMM-yyyy'}}</a></td>
           <td nowrap>{{session.locationName}}</td>
-          <td nowrap>{{session.mates}}</td>
+          <td nowrap>{{session.partnerNames}}</td>
           <td>{{session.comment}}</td>
           <td><a [routerLink]="['/session-edit', session.id, userId]"><img src="./assets/edit.png"></a></td>
         </tr>

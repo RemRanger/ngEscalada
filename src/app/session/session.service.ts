@@ -38,7 +38,7 @@ export class SessionService
     body.append('comment', session.comment);
     body.append('date', session.date.toString());
     body.append('locationId', session.locationId.toString());
-    body.append('mateIds', session.mateIds);
+    body.append('mateIds', session.partnerIdsAsString);
     if (session.id)
     {
       body.append('id', session.id.toString());

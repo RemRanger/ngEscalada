@@ -5,6 +5,7 @@ export class Session
   date: Date;
   locationId: number;
   locationName: string;
-  mates: string;
-  mateIds: string;
+  partnerNames: string;
+  partnerIdsAsString: string;
+  partnerIds: number[] = [];
 }

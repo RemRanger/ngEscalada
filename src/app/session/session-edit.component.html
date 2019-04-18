@@ -19,9 +19,9 @@
       <tr *ngIf="(locationId.touched || locationId.dirty) && !locationId.valid "><td align="center" style="color:red;font-size-adjust:0.4">Please select a location.</td></tr>
       <tr>
         <td align="center">
-          <select name="mateIds" [(ngModel)]="session.mateIds" multiple=multiple size='30'>
+          <select name="partnerIds" [(ngModel)]="session.partnerIds" multiple=multiple size='30'>
             <option disabled>--Were you with others? If so, please select--</option>
-            <option *ngFor="let user of users" [value]="user.id" [selected]="hasMate(user.id)">{{user.firstName}} {{user.lastName}}</option>
+            <option *ngFor="let user of users" [value]="user.id" >{{user.firstName}} {{user.lastName}}</option>
           </select>
         </td>
       </tr>
