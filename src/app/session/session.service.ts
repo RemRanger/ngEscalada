@@ -8,7 +8,7 @@ import { Session } from './session';
 @Injectable({ providedIn: 'root' })
 export class SessionService
 {
-  apiUrlRead = Utils.getApiUrl('sessions', apiKind.read);
+  apiUrlRead = Utils.getApiUrl('session', apiKind.read);
 
   constructor(private http: HttpClient) { }
 

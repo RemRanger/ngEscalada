@@ -8,7 +8,7 @@ import { Utils, apiKind } from '../shared/utils';
 @Injectable({ providedIn: 'root' })
 export class RouteService
 {
-  apiUrlRead = Utils.getApiUrl('routes', apiKind.read);
+  apiUrlRead = Utils.getApiUrl('route', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
