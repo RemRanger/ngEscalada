@@ -1,15 +1,18 @@
-  <div align="center">
+<div align="center">
   <h1>Climbers</h1>
-  <table *ngIf='users && users.length'>
-    <thead>
-      <tr><th colspan="2">Climber</th></tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let user of users'>
-        <td width="16" [style.background-color]="user.gender == 'F' ? 'violet' : 'blue'"></td>
-        <td>{{user.firstName}} {{user.lastName}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <br /><a href="{{getApiUrl()}}">API</a>
+  <div *ngIf='users && users.length; else wait'>
+    <table>
+      <thead>
+        <tr><th colspan="2">Climber</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let user of users'>
+          <td width="16" [style.background-color]="user.gender == 'F' ? 'violet' : 'blue'"></td>
+          <td>{{user.firstName}} {{user.lastName}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <br /><a href="{{getApiUrl()}}">API</a>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
 </div>

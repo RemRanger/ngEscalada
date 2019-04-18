@@ -1,34 +1,37 @@
 <div align="center">
-  <table id="noalt" *ngIf='attempts && attempts.length'>
-    <tr class="noalt" *ngFor='let attemptGroup of getAttemptGroups()'>
-      <td>
-        <table width="100%">
-          <tr style="background-color:rgba(0, 0, 0, 0.2)">
-            <td colspan="100">{{attemptGroup.attempts[0].sessionDate | date: 'EEE dd-MMM-yyyy'}}, {{attemptGroup.attempts[0].locationName}}</td>
-          </tr>
-          <tr style="background-color:rgba(0, 0, 0, 0.1)">
-            <td colspan="100">Climber:&nbsp;<a [routerLink]="['/sessions', attemptGroup.sessionId, attemptGroup.userId]">{{attemptGroup.attempts[0].userFirstName}} {{attemptGroup.attempts[0].userLastName}}</a></td>
-          </tr>
+  <div *ngIf='attempts && attempts.length; else wait'>
+    <table id="noalt">
+      <tr class="noalt" *ngFor='let attemptGroup of getAttemptGroups()'>
+        <td>
+          <table width="100%">
+            <tr style="background-color:rgba(0, 0, 0, 0.2)">
+              <td colspan="100">{{attemptGroup.attempts[0].sessionDate | date: 'EEE dd-MMM-yyyy'}}, {{attemptGroup.attempts[0].locationName}}</td>
+            </tr>
+            <tr style="background-color:rgba(0, 0, 0, 0.1)">
+              <td colspan="100">Climber:&nbsp;<a [routerLink]="['/sessions', attemptGroup.sessionId, attemptGroup.userId]">{{attemptGroup.attempts[0].userFirstName}} {{attemptGroup.attempts[0].userLastName}}</a></td>
+            </tr>
 
-          <tr>
-            <th colspan="2">Route</th>
-            <th align="left">Type</th>
-            <th align="left">Rating</th>
-            <th align="left">Location</th>
-            <th width="40"><img src="./assets/result-finish.png"></th>
-          </tr>
-          <tr *ngFor="let attempt of attemptGroup.attempts">
-            <td width="16" [style.background-color]="attempt.routeColor"></td>
-            <td width="300" style="white-space: nowrap">{{attempt.routeName}}</td>
-            <td width="100" style="white-space: nowrap">{{attempt.routeType}}</td>
-            <td width="60" style="white-space: nowrap">{{attempt.routeRating}}</td>
-            <td width="200">{{attempt.routeSublocation}}</td>
-            <td width="40" style="white-space: nowrap;color: red" *ngIf="attempt.result == 0 && attempt.percentage != null; else pic">{{attempt.percentage || 0}}%</td>
-            <ng-template #pic><td width="40" style="white-space: nowrap" align="center"><img *ngIf="getResultPic(attempt.result) != null" [src]="'./assets/' + getResultPic(attempt.result)"></td></ng-template>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
-  <br /><a href="{{getApiUrl()}}">API</a>
+            <tr>
+              <th colspan="2">Route</th>
+              <th align="left">Type</th>
+              <th align="left">Rating</th>
+              <th align="left">Location</th>
+              <th width="40"><img src="./assets/result-finish.png"></th>
+            </tr>
+            <tr *ngFor="let attempt of attemptGroup.attempts">
+              <td width="16" [style.background-color]="attempt.routeColor"></td>
+              <td width="300" style="white-space: nowrap">{{attempt.routeName}}</td>
+              <td width="100" style="white-space: nowrap">{{attempt.routeType}}</td>
+              <td width="60" style="white-space: nowrap">{{attempt.routeRating}}</td>
+              <td width="200">{{attempt.routeSublocation}}</td>
+              <td width="40" style="white-space: nowrap;color: red" *ngIf="attempt.result == 0 && attempt.percentage != null; else pic">{{attempt.percentage || 0}}%</td>
+              <ng-template #pic><td width="40" style="white-space: nowrap" align="center"><img *ngIf="getResultPic(attempt.result) != null" [src]="'./assets/' + getResultPic(attempt.result)"></td></ng-template>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+    <br /><a href="{{getApiUrl()}}">API</a>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
 </div>

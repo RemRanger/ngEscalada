@@ -32,6 +32,32 @@ export class SessionService
     );
   }
 
+  saveSession(session: Session): Observable<Session | undefined>
+  {
+    let body = new FormData();
+    body.append('id', session.id.toString());
+    body.append('comment', session.comment);
+    body.append('date', session.date.toString());
+    body.append('locationId', session.locationId.toString());
+    body.append('mateIds', session.mateIds);
+    if (session.id)
+    {
+      return this.http.post<any>(this.apiUrl, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+    else
+    {
+      return this.http.put<any>(this.apiUrl, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+  }
+
   private handleError(err: HttpErrorResponse)
   {
     // in a real world app, we may send the server to some remote logging infrastructure

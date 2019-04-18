@@ -7,6 +7,7 @@ import { SessionDetailGuard } from './session-detail.guard';
 import { AttemptModule } from '../attempt/attempt.module';
 import { SessionEditComponent } from './session-edit.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SessionListComponent, SessionDetailComponent, SessionEditComponent],
@@ -14,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
     [
       CommonModule,
       SharedModule,
+      FormsModule,
       RouterModule.forChild
         ([
           { path: 'sessions', component: SessionListComponent },
@@ -24,6 +26,7 @@ import { SharedModule } from '../shared/shared.module';
           },
           { path: 'session-edit/:id/:userId', component: SessionEditComponent }
         ]),
+      SharedModule,
       AttemptModule
     ]
 })

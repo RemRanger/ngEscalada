@@ -6,6 +6,7 @@ import { AgmCoreModule } from '@agm/core';
 import { LocationDetailComponent } from './location-detail.component';
 import { LocationDetailGuard } from './location-detail.guard';
 import { RouteModule } from '../route/route.module';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule
   ({
@@ -23,6 +24,7 @@ import { RouteModule } from '../route/route.module';
             },
           ]),
         AgmCoreModule.forRoot({ apiKey: 'AIzaSyD11s3QW5R_71Ywy8UmdJ6LhZlaVBPkawI' }),
+        SharedModule,
         RouteModule
       ]
   })

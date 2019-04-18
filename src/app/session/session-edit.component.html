@@ -1,6 +1,6 @@
 <div align="center">
   <h1>Edit session</h1>
-  <form method="post">
+  <form method="post" (ngSubmit)="submit(sessionEditForm)" #sessionEditForm="ngForm">
     <table>
       <tr>
         <td align="center">
@@ -10,12 +10,13 @@
       </tr>
       <tr>
         <td align="center">
-          <select name="IdLocation">
-            <option disabled>--Please select a location--</option>
+          <select name="IdLocation" required [(ngModel)]="session.locationId" #locationId="ngModel">
+            <option disabled selected [value]="undefined">--Please select a location--</option>
             <option *ngFor="let location of locations" [value]="location.id" [selected]="location.id == session.locationId">{{location.name}}</option>
           </select>
         </td>
       </tr>
+      <tr *ngIf="(locationId.touched || locationId.dirty) && !locationId.valid "><td align="center" style="color:red;font-size-adjust:0.4">Please select a location.</td></tr>
       <tr>
         <td align="center">
           <select name="PartnerIds" multiple=multiple size='30'>
@@ -31,7 +32,7 @@
       </tr>
     </table>
     <br />
-    <button style="width:100px" type="submit" name="btn-editsession">OK</button>&nbsp;&nbsp;
+    <button style="width:100px" type="submit" [disabled]="!sessionEditForm.valid">OK</button>&nbsp;&nbsp;
     <input type="button" value="Cancel" style="width:100px" onClick="history.go(-1);" />
   </form>
 </div>

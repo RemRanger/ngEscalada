@@ -15,6 +15,7 @@ import { SessionModule } from './session/session.module';
 import { AttemptModule } from './attempt/attempt.module';
 import { ActivityListComponent } from './home/activity-list.component';
 import { LoginModule } from './login/login.module';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { LoginModule } from './login/login.module';
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),
+    SharedModule,
     LocationModule,
     UserModule,
     LoginModule,

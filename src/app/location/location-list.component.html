@@ -1,25 +1,28 @@
 <div align="center">
   <h1>Locations</h1>
-  <table *ngIf='locations && locations.length'>
-    <thead>
-      <tr>
-        <th colspan="2">Location</th>
-        <th>Website</th>
-      <tr>
-    </thead>
-    <tbody>
-      <tr *ngFor='let location of locations'>
-        <td>{{location.name}}</td>
-        <td><a [routerLink]="['/locations', location.id]">&nbsp;Topo&nbsp;</a></td>
-        <td>
-          <a href="http://{{location.websiteUrl}}">{{location.websiteUrl}}</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf='locations && locations.length; else wait'>
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">Location</th>
+          <th>Website</th>
+        <tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let location of locations'>
+          <td>{{location.name}}</td>
+          <td><a [routerLink]="['/locations', location.id]">&nbsp;Topo&nbsp;</a></td>
+          <td>
+            <a href="http://{{location.websiteUrl}}">{{location.websiteUrl}}</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <br>
-  <!--<agm-map [latitude]="latMid" [longitude]="longMid"></agm-map>-->
+    <br>
+    <!--<agm-map [latitude]="latMid" [longitude]="longMid"></agm-map>-->
 
-  <a href="{{getApiUrl()}}">API</a>
+    <a href="{{getApiUrl()}}">API</a>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
 </div>
