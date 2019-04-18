@@ -35,13 +35,13 @@ export class SessionService
   saveSession(session: Session): Observable<Session | undefined>
   {
     let body = new FormData();
-    body.append('id', session.id.toString());
     body.append('comment', session.comment);
     body.append('date', session.date.toString());
     body.append('locationId', session.locationId.toString());
     body.append('mateIds', session.mateIds);
     if (session.id)
     {
+      body.append('id', session.id.toString());
       return this.http.post<any>(this.apiUrlRead, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),

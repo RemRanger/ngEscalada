@@ -1,15 +1,27 @@
-import { Component, OnInit, LOCALE_ID, Inject, Input } from '@angular/core';
+import { Component, OnInit, LOCALE_ID, Inject, forwardRef, Provider, Input, Output, EventEmitter } from '@angular/core';
 import { formatDate } from '@angular/common';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-@Component({
-  selector: 'esc-datepicker',
-  templateUrl: './datepicker.component.html',
-  styleUrls: ['./datepicker.component.css']
-})
-export class DatepickerComponent implements OnInit
+@Component
+  ({
+    selector: 'esc-datepicker',
+    templateUrl: './datepicker.component.html',
+    styleUrls: ['./datepicker.component.css'],
+    providers:
+      [
+        {
+          provide: NG_VALUE_ACCESSOR,
+          useExisting: forwardRef(() => DatepickerComponent),
+          multi: true
+        }
+      ]
+  })
+
+export class DatepickerComponent implements OnInit, ControlValueAccessor 
 {
-  @Input() date: Date;
-  selectedDate: Date;
+  @Input() inputModel: any;
+  @Output() inputModelChange = new EventEmitter<Date>();
+  private date: Date;
   selectedYear: number;
   selectedMonth: number;
   selectedDay: number;
@@ -18,10 +30,68 @@ export class DatepickerComponent implements OnInit
 
   ngOnInit()
   {
-    this.selectedDate = new Date(this.date);
-    this.selectedYear = this.selectedDate.getFullYear();
-    this.selectedMonth = this.selectedDate.getMonth() + 1;
-    this.selectedDay = this.selectedDate.getDate();
+  }
+
+  registerOnChange(fn: any): void
+  {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void
+  {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void
+  {
+  }
+
+  onChange: any = () => { };
+  onTouched: any = () => { };
+
+  updateChanges()
+  {
+    this.date = new Date(this.selectedYear, this.selectedMonth - 1, this.selectedDay, 0, 0, 0, 0);
+    console.log("updateChanges:", this.value);
+    this.onChange(this.value);
+  }
+
+  public get value()
+  {
+    return this.date;
+  }
+
+  public set value(date: Date)
+  {
+    this.date = new Date(date);
+    this.updateControls();
+
+    this.onChange(this.date);
+    this.onTouched();
+  }
+
+  writeValue(date: Date): void
+  {
+    this.date = new Date(date);
+    this.updateControls();
+    this.updateChanges();
+  }
+
+  private updateControls()
+  {
+    if (this.date)
+    {
+      this.selectedYear = this.date.getFullYear();
+      this.selectedMonth = this.date.getMonth() + 1;
+      this.selectedDay = this.date.getDate();
+      console.log("Updated date:", this.date.toLocaleDateString("nl-NL"), this.selectedYear, this.selectedMonth, this.selectedDay);
+    }
+  }
+
+  // Optional
+  onSomeEventOccured(newValue)
+  {
+    this.value = newValue;
   }
 
   getYears(): number[]
@@ -44,7 +114,7 @@ export class DatepickerComponent implements OnInit
 
   getMonthName(month: number): string
   {
-    return formatDate(new Date(this.selectedYear, month - 1, 1), 'MMMM', this.locale);
+    return formatDate(new Date(2000, month - 1, 1), 'MMMM', this.locale);
   }
 
   getDays()

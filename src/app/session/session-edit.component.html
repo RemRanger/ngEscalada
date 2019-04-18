@@ -4,13 +4,13 @@
     <table>
       <tr>
         <td align="center">
-          <!--Date: {{session.date}}-->
-          <esc-datepicker *ngIf="session && session.date" [date]="session.date"></esc-datepicker>
+          <esc-datepicker *ngIf="session && session.date; else waitdate" name="date" [(ngModel)]="session.date"></esc-datepicker>
+          <ng-template #waitDate><esc-wait-loading></esc-wait-loading></ng-template>
         </td>
       </tr>
       <tr>
         <td align="center">
-          <select name="IdLocation" required [(ngModel)]="session.locationId" #locationId="ngModel">
+          <select name="locationId" required [(ngModel)]="session.locationId" #locationId="ngModel">
             <option disabled selected [value]="undefined">--Please select a location--</option>
             <option *ngFor="let location of locations" [value]="location.id" [selected]="location.id == session.locationId">{{location.name}}</option>
           </select>
@@ -19,7 +19,7 @@
       <tr *ngIf="(locationId.touched || locationId.dirty) && !locationId.valid "><td align="center" style="color:red;font-size-adjust:0.4">Please select a location.</td></tr>
       <tr>
         <td align="center">
-          <select name="PartnerIds" multiple=multiple size='30'>
+          <select name="mateIds" [(ngModel)]="session.mateIds" multiple=multiple size='30'>
             <option disabled>--Were you with others? If so, please select--</option>
             <option *ngFor="let user of users" [value]="user.id" [selected]="hasMate(user.id)">{{user.firstName}} {{user.lastName}}</option>
           </select>
@@ -27,7 +27,7 @@
       </tr>
       <tr>
         <td>
-          <textarea rows="4" cols="50" name="Comment" form="sessionform">{{session.comment}}</textarea>
+          <textarea rows="4" cols="50" name="comment" [(ngModel)]="session.comment" form="sessionform">{{session.comment}}</textarea>
         </td>
       </tr>
     </table>

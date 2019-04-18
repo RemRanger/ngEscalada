@@ -76,8 +76,9 @@ export class SessionEditComponent implements OnInit
   submit(sessionEditForm: NgForm)
   {
     console.log(sessionEditForm.form);
-    console.log('Register: ' + JSON.stringify(sessionEditForm.value));
-    this.sessionService.saveSession(sessionEditForm.value).subscribe
+    console.log('Edit session: ' + JSON.stringify(this.session));
+    console.log('Form value: ' + JSON.stringify(sessionEditForm.value));
+    this.sessionService.saveSession(this.session).subscribe
       (
         response =>
         {
