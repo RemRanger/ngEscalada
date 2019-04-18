@@ -9,6 +9,7 @@ import { Session } from './session';
 export class SessionService
 {
   apiUrlRead = Utils.getApiUrl('session', apiKind.read);
+  apiUrlCreate = Utils.getApiUrl('session', apiKind.create);
 
   constructor(private http: HttpClient) { }
 
@@ -32,17 +33,22 @@ export class SessionService
     );
   }
 
-  saveSession(session: Session): Observable<Session | undefined>
+  saveSession(session: Session, userId: number): Observable<Session | undefined>
   {
     let body = new FormData();
     body.append('comment', session.comment);
-    body.append('date', session.date.toString());
+    body.append('date', session.date.toISOString());
     body.append('locationId', session.locationId.toString());
-    body.append('mateIds', session.partnerIdsAsString);
+    body.append('partnerIds', session.partnerIdsAsString);
+    body.append('userId', userId.toString());
+
+    console.log("Session: ", session)
+    console.log("User Id: ", userId)
+
     if (session.id)
     {
       body.append('id', session.id.toString());
-      return this.http.post<any>(this.apiUrlRead, body).pipe
+      return this.http.put<any>(this.apiUrlCreate, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
@@ -50,7 +56,7 @@ export class SessionService
     }
     else
     {
-      return this.http.put<any>(this.apiUrlRead, body).pipe
+      return this.http.post<any>(this.apiUrlCreate, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)

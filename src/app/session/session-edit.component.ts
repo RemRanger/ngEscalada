@@ -17,6 +17,7 @@ import { Location } from '@angular/common';
 export class SessionEditComponent implements OnInit
 {
   session: Session;
+  userId: number;
   locations: ILocation[] = [];
   users: User[] = [];
   errorMessage = '';
@@ -26,13 +27,15 @@ export class SessionEditComponent implements OnInit
   {
     const paramId = this.route.snapshot.paramMap.get('id');
     const paramUserId = this.route.snapshot.paramMap.get('userId');
+
+    if (paramUserId)
+      this.userId = +paramUserId;
     if (paramId && paramUserId)
     {
       const id = +paramId;
-      const userId = +paramUserId;
       if (id > 0)
       {
-        this.sessionService.getSession(id, userId).subscribe
+        this.sessionService.getSession(id, this.userId).subscribe
           (
             session =>
             {
@@ -66,23 +69,12 @@ export class SessionEditComponent implements OnInit
   {
   }
 
-  hasMate(userId: number): boolean
-  {
-    if (this.session.partnerIdsAsString)
-    {
-      let mateIdArray: string[] = this.session.partnerIdsAsString.toString().split(",");
-      return mateIdArray.indexOf(userId.toString()) >= 0;
-    }
-    else
-      return false;
-  }
-
   submit(sessionEditForm: NgForm)
   {
     console.log(sessionEditForm.form);
     console.log('Edit session: ' + JSON.stringify(this.session));
     console.log('Form value: ' + JSON.stringify(sessionEditForm.value));
-    this.sessionService.saveSession(this.session).subscribe
+    this.sessionService.saveSession(this.session, this.userId).subscribe
       (
         response =>
         {
