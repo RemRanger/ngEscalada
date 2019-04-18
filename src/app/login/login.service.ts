@@ -3,13 +3,13 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
 import { User } from '../user/user';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService
 {
-  apiUrl = Utils.getApiUrl('login');
-  apiUrlRegister = Utils.getApiUrl('register');
+  apiUrlLoginRead = Utils.getApiUrl('user-login', apiKind.read);
+  apiUrlCreate = Utils.getApiUrl('user', apiKind.create);
 
   constructor(private http: HttpClient) { }
 
@@ -18,7 +18,7 @@ export class LoginService
     let body = new FormData();
     body.append('userName', userName);
     body.append('password', password);
-    return this.http.post<any>(this.apiUrl, body).pipe
+    return this.http.post<any>(this.apiUrlLoginRead, body).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -34,7 +34,7 @@ export class LoginService
     body.append('email', user.email);
     body.append('password', user.password);
     body.append('userName', user.userName);
-    return this.http.post<any>(this.apiUrlRegister, body).pipe
+    return this.http.post<any>(this.apiUrlCreate, body).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

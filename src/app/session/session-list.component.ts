@@ -27,7 +27,7 @@ export class SessionListComponent implements OnInit
 
   }
 
-  getApiUrl(): string { return this.sessionService.apiUrl; }
+  getApiUrl(): string { return this.sessionService.apiUrlRead; }
 
   addSession()
   {

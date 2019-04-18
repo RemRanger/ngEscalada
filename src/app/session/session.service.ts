@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError, map } from 'rxjs/operators';
@@ -8,7 +8,7 @@ import { Session } from './session';
 @Injectable({ providedIn: 'root' })
 export class SessionService
 {
-  apiUrl = Utils.getApiUrl('sessions');
+  apiUrlRead = Utils.getApiUrl('sessions', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class SessionService
     if (userId != null)
     {
       let params = new HttpParams().set('userId', userId.toString());
-      return this.http.get<Session[]>(this.apiUrl, { params: params }).pipe
+      return this.http.get<Session[]>(this.apiUrlRead, { params: params }).pipe
         (
           //tap(data => console.log('Sessions: ' + JSON.stringify(data))),
           catchError(this.handleError)
@@ -42,7 +42,7 @@ export class SessionService
     body.append('mateIds', session.mateIds);
     if (session.id)
     {
-      return this.http.post<any>(this.apiUrl, body).pipe
+      return this.http.post<any>(this.apiUrlRead, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
@@ -50,7 +50,7 @@ export class SessionService
     }
     else
     {
-      return this.http.put<any>(this.apiUrl, body).pipe
+      return this.http.put<any>(this.apiUrlRead, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)

@@ -3,18 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class UserService
 {
-  apiUrl = Utils.getApiUrl('users');
+  apiUrlRead = Utils.getApiUrl('users', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
   getUsers(): Observable<User[]>
   {
-    return this.http.get<User[]>(this.apiUrl).pipe(
+    return this.http.get<User[]>(this.apiUrlRead).pipe(
       tap(data => console.log('All: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

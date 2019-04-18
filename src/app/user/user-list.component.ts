@@ -22,5 +22,5 @@ export class UserListComponent implements OnInit
     );
   }
 
-  getApiUrl(): string { return this.userService.apiUrl; }
+  getApiUrl(): string { return this.userService.apiUrlRead; }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 import { Observable, throwError } from 'rxjs';
 import { IAttempt } from './attempt';
 import { tap, catchError } from 'rxjs/operators';
@@ -8,13 +8,13 @@ import { tap, catchError } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class AttemptService
 {
-  apiUrl = Utils.getApiUrl('attempts');
+  apiUrlRead = Utils.getApiUrl('attempts', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
   getAllAttempts(): Observable<IAttempt[]>
   {
-    return this.http.get<IAttempt[]>(this.apiUrl).pipe
+    return this.http.get<IAttempt[]>(this.apiUrlRead).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)
@@ -24,7 +24,7 @@ export class AttemptService
   getAttempts(sessionId: number, userId: number): Observable<IAttempt[]>
   {
     let params = new HttpParams().set('sessionId', sessionId.toString()).set('userId', userId.toString());
-    return this.http.get<IAttempt[]>(this.apiUrl, { params: params }).pipe
+    return this.http.get<IAttempt[]>(this.apiUrlRead, { params: params }).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

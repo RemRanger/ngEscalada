@@ -3,19 +3,19 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { IRoute } from './route';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class RouteService
 {
-  apiUrl = Utils.getApiUrl('routes');
+  apiUrlRead = Utils.getApiUrl('routes', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
   getRoutes(locationId: number): Observable<IRoute[]>
   {
     let params = new HttpParams().set('locationId', locationId.toString());
-    return this.http.get<IRoute[]>(this.apiUrl, { params: params }).pipe
+    return this.http.get<IRoute[]>(this.apiUrlRead, { params: params }).pipe
       (
         tap(data => console.log('All: ' + JSON.stringify(data))),
         catchError(this.handleError)

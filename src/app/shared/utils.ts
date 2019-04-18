@@ -1,5 +1,7 @@
 import { User } from '../user/user';
 
+export enum apiKind { read = "read", create = "create", update = "update", delete = "delete" }
+
 export class Utils
 {
   static getResultPic(result: number): string
@@ -18,8 +20,8 @@ export class Utils
   static getUser(): User { return Utils.theUser; }
   static getUserId(): number { return Utils.theUser != null ? Utils.theUser.id : null; }
 
-  static getApiUrl(apiName: string): string
+  static getApiUrl(apiName: string, kind: apiKind ): string
   {
-    return 'https://www.remranger.com/escalada-api/' + apiName + '.php';
+    return 'https://www.remranger.com/escalada-api/' + apiName + "-" + kind.toString() + '.php';
   }
 }

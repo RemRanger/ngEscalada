@@ -44,5 +44,5 @@ export class LocationListComponent implements OnInit
     }
   }
 
-  getApiUrl(): string { return this.locationService.apiUrl; }
+  getApiUrl(): string { return this.locationService.apiUrlRead; }
 }

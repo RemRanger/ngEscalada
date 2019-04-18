@@ -3,18 +3,18 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { ILocation } from './location';
-import { Utils } from '../shared/utils';
+import { Utils, apiKind } from '../shared/utils';
 
 @Injectable({ providedIn: 'root' })
 export class LocationService
 {
-  apiUrl = Utils.getApiUrl('locations');
+  apiUrlRead = Utils.getApiUrl('locations', apiKind.read);
 
   constructor(private http: HttpClient) { }
 
   getLocations(): Observable<ILocation[]>
   {
-    return this.http.get<ILocation[]>(this.apiUrl).pipe(
+    return this.http.get<ILocation[]>(this.apiUrlRead).pipe(
       //tap(data => console.log('Locations: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );

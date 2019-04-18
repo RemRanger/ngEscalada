@@ -29,5 +29,5 @@ export class AttemptListComponent implements OnInit
 
   getResultPic(result: number): string { return Utils.getResultPic(result); }
 
-  getApiUrl(): string { return this.attemptService.apiUrl; }
+  getApiUrl(): string { return this.attemptService.apiUrlRead; }
 }
