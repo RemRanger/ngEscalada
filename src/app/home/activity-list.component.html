@@ -1,9 +1,9 @@
 <div align="center">
   <div *ngIf='attempts; else wait'>
-    <table id="noalt">
-      <tr class="noalt" *ngFor='let attemptGroup of getAttemptGroups()'>
+    <table>
+      <tr *ngFor='let attemptGroup of getAttemptGroups()'>
         <td>
-          <table width="100%">
+          <table class="grid">
             <tr style="background-color:rgba(0, 0, 0, 0.2)">
               <td colspan="100">{{attemptGroup.attempts[0].sessionDate | date: 'EEE dd-MMM-yyyy'}}, {{attemptGroup.attempts[0].locationName}}</td>
             </tr>

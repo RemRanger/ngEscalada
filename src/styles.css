@@ -22,14 +22,14 @@ table
   max-width: 1000px;
 }
 
-.alt tr:nth-child(even)
+table.grid tr:nth-child(even)
 {
   background-color: rgba(0, 0, 0, 0.1)
 }
 
-tr.noalt:nth-child(even)
+table.grid tr:nth-child(odd)
 {
-  background-color: rgba(0, 0, 0, 0)
+  background-color: rgba(0, 0, 0, 0.05)
 }
 
 table.noborder, th.noborder, td.noborder

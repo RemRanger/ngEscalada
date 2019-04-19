@@ -1,7 +1,7 @@
 <div align="center">
   <div *ngIf='attempts; else wait'>
     <p><button (click)="addAttempt()">Add attempt</button></p>
-    <table *ngIf="attempts.length; else none">
+    <table class="grid" *ngIf="attempts.length; else none">
       <thead>
         <tr>
           <th colspan="2">Route</th>
