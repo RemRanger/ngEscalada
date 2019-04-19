@@ -10,6 +10,7 @@ export class SessionService
 {
   apiUrlRead = Utils.getApiUrl('session', apiKind.read);
   apiUrlCreate = Utils.getApiUrl('session', apiKind.create);
+  apiUrlUpdate = Utils.getApiUrl('session', apiKind.update);
 
   constructor(private http: HttpClient) { }
 
@@ -52,7 +53,7 @@ export class SessionService
     if (session.id)
     {
       body.append('id', session.id.toString());
-      return this.http.put<any>(this.apiUrlCreate, body).pipe
+      return this.http.post<any>(this.apiUrlUpdate, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)
