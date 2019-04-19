@@ -15,7 +15,7 @@ export class Attempt
   locationId: number;
   locationName: string;
   sessionId: number;
-  sessionDate: string;
+  sessionDate: Date;
   userId: number;
   userFirstName: string;
   userLastName: string;
