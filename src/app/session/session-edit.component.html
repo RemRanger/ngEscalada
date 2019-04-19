@@ -5,7 +5,7 @@
       <tr>
         <td align="center">
           <esc-datepicker *ngIf="session && session.date; else waitdate" name="date" [(ngModel)]="session.date"></esc-datepicker>
-          <ng-template #waitDate><esc-wait-loading></esc-wait-loading></ng-template>
+          <ng-template #waitdate><esc-wait-loading></esc-wait-loading></ng-template>
         </td>
       </tr>
       <tr>
