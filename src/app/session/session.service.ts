@@ -35,6 +35,19 @@ export class SessionService
     );
   }
 
+  getSingleSession(id: number): Observable<Session[] | undefined>
+  {
+    if (id != null)
+    {
+      let params = new HttpParams().set('id', id.toString());
+      return this.http.get<Session[]>(this.apiUrlRead, { params: params }).pipe
+        (
+          //tap(data => console.log('Sessions: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+  }
+
   saveSession(session: Session, userId: number): Observable<Session | undefined>
   {
     let body = new FormData();

@@ -1,5 +1,5 @@
 <div align="center">
-  <div *ngIf='attempts && attempts.length; else wait'>
+  <div *ngIf='attempts; else wait'>
     <table id="noalt">
       <tr class="noalt" *ngFor='let attemptGroup of getAttemptGroups()'>
         <td>

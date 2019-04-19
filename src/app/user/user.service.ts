@@ -15,7 +15,7 @@ export class UserService
   getUsers(): Observable<User[]>
   {
     return this.http.get<User[]>(this.apiUrlRead).pipe(
-      tap(data => console.log('All: ' + JSON.stringify(data))),
+      tap(data => console.log('Users: ' + JSON.stringify(data))),
       catchError(this.handleError)
     );
   }

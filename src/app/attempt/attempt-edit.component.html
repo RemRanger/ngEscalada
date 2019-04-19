@@ -1,0 +1,58 @@
+<div align="center">
+  <div *ngIf="attempt && routes; else wait">
+    <h1>{{attempt.id > 0 ? "Edit" : "Add"}} attempt</h1>
+    <form method="post" (ngSubmit)="submit(attemptEditForm)" #attemptEditForm="ngForm">
+      <table>
+        <tr>
+          <td align="center">
+            <label>{{attempt.sessionDate | date: 'EEE dd-MMM-yyyy'}} at {{attempt.locationName}}</label>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <label id="WithWhom"></label>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <div style="border: outset; border-width: 1px ;height: 400px; overflow-y: auto">
+              <table>
+                <tr *ngFor="let route of routes" [style.color]="route.id == attempt.routeId ? 'white' : ''" [style.background-color]="route.id == attempt.routeId ? 'black' : ''" [style.opacity]="route.id == attempt.routeId ? '0.5' : ''">
+                  <td><input type="radio" name="routeId" [value]="route.id" [(ngModel)]="attempt.routeId"/></td>
+                  <td style="width: 16px;" [style.background-color]="route.color"></td>
+                  <td>{{route.name}}</td>
+                  <td>{{route.type}}</td>
+                  <td>{{route.rating}}</td>
+                  <td>{{route.sublocation}}</td>
+                </tr>
+              </table>
+            </div>
+        </tr>
+        <tr>
+          <td align="center">
+            Completed:
+            <select name="result" [(ngModel)]="attempt.result">
+              <option value="0">Partly:</option>
+              <option value="1">With fall or block</option>
+              <option value="2">In one go</option>
+            </select>
+            <span *ngIf="attempt.result == 0">
+              <select name="percentage" [(ngModel)]="attempt.percentage">
+                <option *ngFor="let p of percentages" value="p">{{p}}</option>
+              </select> %
+            </span>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <textarea rows="4" cols="50" name="Comment" form="attemptform">{{attempt.comment}}</textarea>
+          </td>
+        </tr>
+      </table>
+      <br>
+      <button style="width:100px" type="submit" name="btn-addattempt">OK</button>&nbsp;&nbsp;
+      <input type="button" value="Cancel" style="width:100px" onClick="history.go(-1);" />
+    </form>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
+</div>

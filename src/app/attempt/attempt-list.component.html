@@ -1,6 +1,7 @@
 <div align="center">
-  <div *ngIf='attempts && attempts.length; else wait'>
-    <table>
+  <div *ngIf='attempts; else wait'>
+    <p><button (click)="addAttempt()">Add attempt</button></p>
+    <table *ngIf="attempts.length; else none">
       <thead>
         <tr>
           <th colspan="2">Route</th>
@@ -24,11 +25,13 @@
           <td width="40" style="white-space: nowrap;color: red" *ngIf="attempt.result == 0 && attempt.percentage != null; else pic">{{attempt.percentage || 0}}%</td>
           <ng-template #pic><td width="40" style="white-space: nowrap" align="center"><img *ngIf="getResultPic(attempt.result) != null" [src]="'./assets/' + getResultPic(attempt.result)"></td></ng-template>
           <td>{{attempt.comment}}</td>
+          <td><a [routerLink]="['/attempt-edit', attempt.id, attempt.sessionId]"><img src="./assets/edit.png"></a></td>
+          <td><a [routerLink]="['/attempt-delete', attempt.id]"><img src="./assets/delete.png"></a></td>
         </tr>
       </tbody>
     </table>
-
+    <ng-template #none><div>There are no attempts in this session.</div></ng-template>
     <br /><a href="{{getApiUrl()}}?sessionId={{sessionId}}&userId={{userId}}">API</a>
   </div>
-  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
+    <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
 </div>

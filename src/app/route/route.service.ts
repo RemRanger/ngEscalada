@@ -17,7 +17,7 @@ export class RouteService
     let params = new HttpParams().set('locationId', locationId.toString());
     return this.http.get<IRoute[]>(this.apiUrlRead, { params: params }).pipe
       (
-        tap(data => console.log('All: ' + JSON.stringify(data))),
+        tap(data => console.log('Routes: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

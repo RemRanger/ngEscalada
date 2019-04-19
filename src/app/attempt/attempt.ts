@@ -1,4 +1,4 @@
-export interface IAttempt
+export class Attempt
 {
   id: number;
   result: number;
@@ -12,6 +12,7 @@ export interface IAttempt
   routeSublocation: string;
   routeDateUntil: Date;
   routePictureFileName: string;
+  locationId: number;
   locationName: string;
   sessionId: number;
   sessionDate: string;
@@ -24,5 +25,5 @@ export class AttemptGroup
 {
   sessionId: number;
   userId: number;
-  attempts: IAttempt[] = [];
+  attempts: Attempt[] = [];
 }

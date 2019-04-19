@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Utils } from '../shared/utils';
 import { AttemptService } from '../attempt/attempt.service';
-import { IAttempt, AttemptGroup } from '../attempt/attempt';
+import { Attempt, AttemptGroup } from '../attempt/attempt';
 
 @Component({
   selector: 'esc-activity-list',
@@ -10,7 +10,7 @@ import { IAttempt, AttemptGroup } from '../attempt/attempt';
 })
 export class ActivityListComponent implements OnInit
 {
-  attempts: IAttempt[] = [];
+  attempts: Attempt[];
   errorMessage = '';
 
   constructor(private attemptService: AttemptService) { }
