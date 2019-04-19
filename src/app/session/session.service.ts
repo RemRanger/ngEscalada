@@ -39,11 +39,15 @@ export class SessionService
     body.append('comment', session.comment);
     body.append('date', session.date.toISOString());
     body.append('locationId', session.locationId.toString());
-    body.append('partnerIds', session.partnerIdsAsString);
+    for (var i = 0; i < session.partnerIds.length; i++)
+      body.append('partnerIds[' + i + ']', session.partnerIds[i].toString());
     body.append('userId', userId.toString());
 
-    console.log("Session: ", session)
-    console.log("User Id: ", userId)
+    //console.log("Session: ", session)
+    //console.log("User Id: ", userId)
+    //console.log("partnerIdsAsString", session.partnerIdsAsString);
+    //console.log("partnerIds", session.partnerIds);
+    //console.log("body", body);
 
     if (session.id)
     {

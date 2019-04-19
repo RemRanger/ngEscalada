@@ -82,7 +82,7 @@ export class SessionEditComponent implements OnInit
           console.log(this.response);
           if (this.response.id > 0)
           {
-            console.log("Success: new user id =", this.response.id);
+            console.log("Success: new session id =", this.response.id);
             this.location.back();
           }
           else

@@ -51,8 +51,11 @@ export class DatepickerComponent implements OnInit, ControlValueAccessor
 
   updateChanges()
   {
-    this.date = new Date(this.selectedYear, this.selectedMonth - 1, this.selectedDay, 0, 0, 0, 0);
-    console.log("updateChanges:", this.value);
+    this.date = new Date(Date.UTC(this.selectedYear, this.selectedMonth - 1, this.selectedDay, 0, 0, 0, 0));
+    console.log("selectedYear:", this.selectedYear);
+    console.log("updateChanges:", this.selectedMonth);
+    console.log("selectedMonth:", this.selectedDay);
+    console.log("selectedDay:", this.date);
     this.onChange(this.value);
   }
 
