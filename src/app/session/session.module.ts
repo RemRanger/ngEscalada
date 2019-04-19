@@ -8,9 +8,10 @@ import { AttemptModule } from '../attempt/attempt.module';
 import { SessionEditComponent } from './session-edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
+import { SessionDeleteComponent } from './session-delete.component';
 
 @NgModule({
-  declarations: [SessionListComponent, SessionDetailComponent, SessionEditComponent],
+  declarations: [SessionListComponent, SessionDetailComponent, SessionEditComponent, SessionDeleteComponent],
   imports:
     [
       CommonModule,
@@ -19,12 +20,9 @@ import { FormsModule } from '@angular/forms';
       RouterModule.forChild
         ([
           { path: 'sessions', component: SessionListComponent },
-          {
-            path: 'sessions/:id/:userId',
-            canActivate: [SessionDetailGuard],
-            component: SessionDetailComponent
-          },
-          { path: 'session-edit/:id/:userId', component: SessionEditComponent }
+          { path: 'sessions/:id/:userId', canActivate: [SessionDetailGuard], component: SessionDetailComponent },
+          { path: 'session-edit/:id/:userId', component: SessionEditComponent },
+          { path: 'session-delete/:id/:userId', component: SessionDeleteComponent }
         ]),
       SharedModule,
       AttemptModule

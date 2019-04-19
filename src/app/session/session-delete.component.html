@@ -1,0 +1,11 @@
+<div align="center">
+  <h1>Delete session</h1>
+  <div *ngIf='session; else wait'>
+    <form method="post" (ngSubmit)="submit(sessionDeleteForm)" #sessionDeleteForm="ngForm">
+      <p>Are you sure you want to delete your session of {{session.date}} at {{session.locationName}}?</p>
+      <button style="width:100px" type="submit" [disabled]="!sessionDeleteForm.valid">Yes</button>&nbsp;&nbsp;
+      <input type="button" value="No" style="width:100px" onClick="history.go(-1);" />
+    </form>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
+</div>

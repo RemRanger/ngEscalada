@@ -11,6 +11,7 @@ export class SessionService
   apiUrlRead = Utils.getApiUrl('session', apiKind.read);
   apiUrlCreate = Utils.getApiUrl('session', apiKind.create);
   apiUrlUpdate = Utils.getApiUrl('session', apiKind.update);
+  apiUrlDelete = Utils.getApiUrl('session', apiKind.delete);
 
   constructor(private http: HttpClient) { }
 
@@ -62,6 +63,23 @@ export class SessionService
     else
     {
       return this.http.post<any>(this.apiUrlCreate, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+  }
+
+  deleteSession(session: Session): Observable<Session | undefined>
+  {
+    if (session.id)
+    {
+      let body = new FormData();
+      body.append('id', session.id.toString());
+
+      console.log("body", body);
+
+      return this.http.post<any>(this.apiUrlDelete, body).pipe
         (
           tap(data => console.log('All: ' + JSON.stringify(data))),
           catchError(this.handleError)

@@ -18,6 +18,7 @@
           <td nowrap>{{session.partnerNames}}</td>
           <td>{{session.comment}}</td>
           <td><a [routerLink]="['/session-edit', session.id, userId]"><img src="./assets/edit.png"></a></td>
+          <td><a [routerLink]="['/session-delete', session.id, userId]"><img src="./assets/delete.png"></a></td>
         </tr>
       </tbody>
     </table>
