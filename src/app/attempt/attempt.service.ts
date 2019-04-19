@@ -9,6 +9,9 @@ import { tap, catchError, map } from 'rxjs/operators';
 export class AttemptService
 {
   apiUrlRead = Utils.getApiUrl('attempt', apiKind.read);
+  apiUrlCreate = Utils.getApiUrl('attempt', apiKind.create);
+  apiUrlUpdate = Utils.getApiUrl('attempt', apiKind.update);
+  apiUrlDelete = Utils.getApiUrl('attempt', apiKind.delete);
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +42,52 @@ export class AttemptService
         tap(data => console.log('Attempts: ' + JSON.stringify(data))),
         catchError(this.handleError)
     );
+  }
+
+  saveAttempt(attempt: Attempt): Observable<Attempt | undefined>
+  {
+    let body = new FormData();
+    body.append('userId', attempt.userId.toString());
+    body.append('sessionId', attempt.sessionId.toString());
+    body.append('routeId', attempt.routeId.toString());
+    body.append('comment', attempt.comment);
+    body.append('result', attempt.result.toString());
+    body.append('percentage', attempt.percentage.toString());
+
+    if (attempt.id)
+    {
+      body.append('id', attempt.id.toString());
+      return this.http.post<any>(this.apiUrlUpdate, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+    else
+    {
+      return this.http.post<any>(this.apiUrlCreate, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
+  }
+
+  deleteAttempt(attempt: Attempt): Observable<Attempt | undefined>
+  {
+    if (attempt.id)
+    {
+      let body = new FormData();
+      body.append('id', attempt.id.toString());
+
+      console.log("body", body);
+
+      return this.http.post<any>(this.apiUrlDelete, body).pipe
+        (
+          tap(data => console.log('All: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
   }
 
   private handleError(err: HttpErrorResponse)

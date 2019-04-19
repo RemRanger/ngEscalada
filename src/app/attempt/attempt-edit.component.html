@@ -38,14 +38,14 @@
             </select>
             <span *ngIf="attempt.result == 0">
               <select name="percentage" [(ngModel)]="attempt.percentage">
-                <option *ngFor="let p of percentages" value="p">{{p}}</option>
+                <option *ngFor="let p of percentages" [value]="p">{{p}}</option>
               </select> %
             </span>
           </td>
         </tr>
         <tr>
           <td align="center">
-            <textarea rows="4" cols="50" name="Comment" form="attemptform">{{attempt.comment}}</textarea>
+            <textarea rows="4" cols="50" name="Comment" [(ngModel)]="attempt.comment">{{attempt.comment}}</textarea>
           </td>
         </tr>
       </table>
