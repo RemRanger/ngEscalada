@@ -37,9 +37,9 @@ export class SessionEditComponent implements OnInit
       {
         this.sessionService.getSession(id, this.userId).subscribe
           (
-            session =>
+            sessions =>
             {
-              this.session = session;
+              this.session = sessions[0];
               this.session.partnerIds = this.getMateIdArray(this.session.partnerIdsAsString);
             },
             error => this.errorMessage = <any>error

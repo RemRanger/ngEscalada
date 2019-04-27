@@ -36,7 +36,7 @@ export class SessionDetailComponent implements OnInit
   {
     this.sessionService.getSession(id, userId).subscribe
       (
-        session => this.session = session,
+        sessions => this.session = sessions[0],
         error => this.errorMessage = <any>error);
   }
 

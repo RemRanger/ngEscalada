@@ -1,7 +1,7 @@
 <div align="center">
   <div *ngIf="attempt && routes; else wait">
     <h1>{{attempt.id > 0 ? "Edit" : "Add"}} attempt</h1>
-    <form method="post" (ngSubmit)="submit(attemptEditForm)" #attemptEditForm="ngForm">
+    <form method="post" novalidate (ngSubmit)="submit(attemptEditForm)" #attemptEditForm="ngForm">
       <table>
         <tr>
           <td align="center">

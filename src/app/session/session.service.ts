@@ -28,11 +28,17 @@ export class SessionService
     }
   }
 
-  getSession(id: number, userId: number): Observable<Session | undefined>
+  getSession(id: number, userId: number): Observable<Session[] | undefined>
   {
-    return this.getSessions(userId).pipe(
-      map((sessions: Session[]) => sessions.find(p => p.id === id))
-    );
+    if (id != null && userId != null)
+    {
+      let params = new HttpParams().set('id', id.toString()).set('userId', userId.toString());
+      return this.http.get<Session[]>(this.apiUrlRead, { params: params }).pipe
+        (
+          //tap(data => console.log('Sessions: ' + JSON.stringify(data))),
+          catchError(this.handleError)
+        );
+    }
   }
 
   getSingleSession(id: number): Observable<Session[] | undefined>

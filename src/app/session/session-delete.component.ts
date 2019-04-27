@@ -31,9 +31,9 @@ export class SessionDeleteComponent implements OnInit
       {
         this.sessionService.getSession(id, this.userId).subscribe
           (
-            session =>
+            sessions =>
             {
-              this.session = session;
+              this.session = sessions[0];
             },
             error => this.errorMessage = <any>error
           );
