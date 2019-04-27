@@ -28,10 +28,11 @@ export class ActivityListComponent implements OnInit
   {
     let attemptGroups: AttemptGroup[] = [];
     let lastSessionId: number = null
+    let lastUserId: number = null
     let attemptGroup: AttemptGroup;
-    for (let attempt of this.attempts.sort((a, b) => { return b.sessionId - a.sessionId }))
+    for (let attempt of this.attempts.sort((a, b) => { return b.userId - a.userId }).sort((a, b) => { return b.sessionId - a.sessionId }))
     {
-      if (attemptGroup == null  || lastSessionId == null || attempt.sessionId != lastSessionId)
+      if (attemptGroup == null || lastSessionId == null || attempt.sessionId != lastSessionId || attempt.userId !== lastUserId)
       {
         attemptGroup = new AttemptGroup()
         attemptGroup.sessionId = attempt.sessionId;
@@ -41,6 +42,7 @@ export class ActivityListComponent implements OnInit
       attemptGroup.attempts.push(attempt);
 
       lastSessionId = attempt.sessionId;
+      lastUserId = attempt.userId;
     }
     return attemptGroups;
   }
