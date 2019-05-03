@@ -9,20 +9,9 @@
     <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
-    <li class="dropdown" *ngIf="getUser() != null else login">
-      <a class="dropbtn" style="color:red;">{{getUser().firstName}}</a>
-      <div class="dropdown-content">
-        <a [routerLink]="&nbsp;['/sessions']">My sessions</a>
-        <a href="" ng-click="logout()">Logout</a>
-      </div>
-    </li>
-    <ng-template #login><li><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li></ng-template>>
-    <!--<li *ngIf="getUser() == null else user"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
-    <ng-template #user>
-      <span style="color:red;">{{getUser().firstName}}:</span>
-      <li><a routerLinkActive='active' [routerLink]="['/sessions']">My sessions</a></li>
-      <li><a href="" ng-click="logout()">Logout</a></li>
-    </ng-template>-->
+    <li *ngIf="getUser() == null"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
+    <li *ngIf="getUser() != null"><a [routerLink]="&nbsp;['/sessions']">My sessions</a></li>
+    <li *ngIf="getUser() != null"><a href="" ng-click="logout()">Logout {{getUser().firstName}}</a></li>
   </ul>
 
   <router-outlet></router-outlet>
