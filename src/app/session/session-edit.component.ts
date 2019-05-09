@@ -53,7 +53,7 @@ export class SessionEditComponent implements OnInit
 
       this.userService.getUsers().subscribe
         (
-          users => this.users = users,
+          users => this.users = users.filter(u => u.id !== this.userId),
           error => this.errorMessage = <any>error
         );
     }
