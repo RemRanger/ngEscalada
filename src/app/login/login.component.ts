@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../user/user.service';
 
+const loginExpiry = 15 / (24 * 60); // 15 minutes;  
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -38,7 +40,7 @@ export class LoginComponent implements OnInit
           if (this.user.id > 0)
           {
             this.userService.setCurrentUserId(this.user.id);
-            this.cookieService.set("userId", this.user.id.toString());
+            this.cookieService.set("userId", this.user.id.toString(), loginExpiry);
             console.log("Success: userId =", this.user.id);
             this.router.navigateByUrl('/sessions');
           }

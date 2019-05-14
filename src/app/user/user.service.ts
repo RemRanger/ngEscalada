@@ -36,10 +36,7 @@ export class UserService
     {
       let value: string = this.cookieService.get("userId");
       if (value)
-      {
-        this.currentUserId = parseInt(value);
-        this.updateCurrentUser();
-      }
+        this.setCurrentUserId(parseInt(value));
     }
 
     return this.currentUserId;
@@ -48,11 +45,7 @@ export class UserService
   setCurrentUserId(userId: number)
   {
     this.currentUserId = userId;
-    this.updateCurrentUser();
-  }
 
-  private updateCurrentUser()
-  {
     if (this.currentUserId)
     {
       this.getUser(this.currentUserId).subscribe

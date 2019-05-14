@@ -17,7 +17,11 @@ export class AppComponent
 
   getCurrentUserId(): number { return this.userService.getCurrentUserId(); }
 
-  getCurrentUser(): User { return this.userService.getCurrentUser(); }
+  getCurrentUserName(): string
+  {
+    let user: User = this.userService.getCurrentUser();
+    return user ? user.firstName : null;
+  }
 
   logout()
   {

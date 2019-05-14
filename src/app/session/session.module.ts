@@ -9,6 +9,7 @@ import { SessionEditComponent } from './session-edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { SessionDeleteComponent } from './session-delete.component';
+import { SessionListGuard } from './session-list.guard';
 
 @NgModule({
   declarations: [SessionListComponent, SessionDetailComponent, SessionEditComponent, SessionDeleteComponent],
@@ -19,7 +20,7 @@ import { SessionDeleteComponent } from './session-delete.component';
       FormsModule,
       RouterModule.forChild
         ([
-          { path: 'sessions', component: SessionListComponent },
+          { path: 'sessions', canActivate: [SessionListGuard], component: SessionListComponent },
           { path: 'sessions/:id/:userId', canActivate: [SessionDetailGuard], component: SessionDetailComponent },
           { path: 'session-edit/:id/:userId', component: SessionEditComponent },
           { path: 'session-delete/:id/:userId', component: SessionDeleteComponent }
