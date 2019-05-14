@@ -5,6 +5,8 @@ import { Login } from './login';
 import { User } from '../user/user';
 import { Utils } from '../shared/utils';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,7 @@ export class LoginComponent implements OnInit
   user: User = null;
   errorMessage = '';
 
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private userService: UserService, private router: Router, private loginService: LoginService, private cookieService: CookieService ) { }
 
   ngOnInit()
   {
@@ -35,13 +37,14 @@ export class LoginComponent implements OnInit
           console.log(this.user);
           if (this.user.id > 0)
           {
-            Utils.setUser(this.user);
+            this.userService.setCurrentUserId(this.user.id);
+            this.cookieService.set("userId", this.user.id.toString());
             console.log("Success: userId =", this.user.id);
             this.router.navigateByUrl('/sessions');
           }
           else
           {
-            Utils.setUser(null);
+            this.userService.setCurrentUserId(null);
             console.log("Failure: userId =", this.user.id);
           }
         },
@@ -53,7 +56,7 @@ export class LoginComponent implements OnInit
         ,
         () =>
         {
-          console.log("The POST observable is now completed. response = ",  Utils.getUser());
+          console.log("The POST observable is now completed. response = ", this.userService.getCurrentUserId());
         }
       );
   }

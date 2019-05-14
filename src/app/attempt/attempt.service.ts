@@ -19,7 +19,7 @@ export class AttemptService
   {
     return this.http.get<Attempt[]>(this.apiUrlRead).pipe
       (
-        tap(data => console.log('All: ' + JSON.stringify(data))),
+        tap(data => console.log('Attempts: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
@@ -59,7 +59,7 @@ export class AttemptService
       body.append('id', attempt.id.toString());
       return this.http.post<any>(this.apiUrlUpdate, body).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          tap(data => console.log('Update attempt: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }
@@ -67,7 +67,7 @@ export class AttemptService
     {
       return this.http.post<any>(this.apiUrlCreate, body).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          tap(data => console.log('Create attempt: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }

@@ -1,18 +1,21 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <ul class='topnav'>
-    <li>
-      <img src="favicon.ico" style="vertical-align:middle" />
-      <span style="color:red; font-weight:800">&nbsp;&nbsp;&Xi;SC&Lambda;L&Lambda;D&Lambda;&nbsp;</span>
-    </li>
-    <li><a routerLinkActive='active' [routerLink]="['/home']">Home</a></li>
-    <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
-    <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
-    <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
-    <li *ngIf="getUser() == null"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
-    <li *ngIf="getUser() != null"><a routerLinkActive='active' [routerLink]="&nbsp;['/sessions']">My sessions</a></li>
-    <li *ngIf="getUser() != null"><a href="" ng-click="logout()">Logout {{getUser().firstName}}</a></li>
-  </ul>
+  <div *ngIf='true || !getCurrentUserId() || getCurrentUser(); else wait'>
+    <ul class='topnav'>
+      <li>
+        <img src="favicon.ico" style="vertical-align:middle" />
+        <span style="color:red; font-weight:800">&nbsp;&nbsp;&Xi;SC&Lambda;L&Lambda;D&Lambda;&nbsp;</span>
+      </li>
+      <li><a routerLinkActive='active' [routerLink]="['/home']">Home</a></li>
+      <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
+      <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
+      <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
+      <li *ngIf="!getCurrentUserId()"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
+      <li *ngIf="getCurrentUserId()"><a routerLinkActive='active' [routerLink]="&nbsp;['/sessions']">My sessions</a></li>
+      <li *ngIf="getCurrentUserId()"><a href="" (click)="logout()">Logout {{getCurrentUser().firstName}}</a></li>
+    </ul>
 
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
+  </div>
+  <ng-template #wait><esc-wait-loading></esc-wait-loading></ng-template>
 </div>

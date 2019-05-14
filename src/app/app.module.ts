@@ -16,6 +16,7 @@ import { AttemptModule } from './attempt/attempt.module';
 import { ActivityListComponent } from './home/activity-list.component';
 import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared/shared.module';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { SharedModule } from './shared/shared.module';
     SessionModule,
     AttemptModule
   ],
-  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }],
+  providers: [{ provide: LocationStrategy, useClass: HashLocationStrategy }, CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

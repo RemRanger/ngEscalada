@@ -45,7 +45,8 @@ export class SessionDetailComponent implements OnInit
     this.userService.getUser(userId).subscribe
       (
         user => this.user = user,
-        error => this.errorMessage = <any>error);
+        error => this.errorMessage = <any>error
+      );
   }
 
   onBack(): void

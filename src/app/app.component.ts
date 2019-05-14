@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Utils } from './shared/utils';
 import { User } from './user/user';
-import { Router } from '@angular/router';
+import { UserService } from './user/user.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'esc-root',
@@ -11,11 +12,16 @@ import { Router } from '@angular/router';
 export class AppComponent
 {
   pageTitle = 'Escalada';
+  
+  constructor(private userService: UserService, private cookieService: CookieService) { }
 
-  getUser(): User { return Utils.getUser(); }
+  getCurrentUserId(): number { return this.userService.getCurrentUserId(); }
+
+  getCurrentUser(): User { return this.userService.getCurrentUser(); }
 
   logout()
   {
-    Utils.setUser(null);
+    this.cookieService.set("userId", null);
+    this.userService.setCurrentUserId(null);
   }
 }

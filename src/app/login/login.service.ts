@@ -20,7 +20,7 @@ export class LoginService
     body.append('password', password);
     return this.http.post<any>(this.apiUrlLoginRead, body).pipe
       (
-        tap(data => console.log('All: ' + JSON.stringify(data))),
+        tap(data => console.log('Get login user: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }
@@ -36,7 +36,7 @@ export class LoginService
     body.append('userName', user.userName);
     return this.http.post<any>(this.apiUrlCreate, body).pipe
       (
-        tap(data => console.log('All: ' + JSON.stringify(data))),
+        tap(data => console.log('Create user: ' + JSON.stringify(data))),
         catchError(this.handleError)
       );
   }

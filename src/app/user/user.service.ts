@@ -4,13 +4,16 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 import { User } from './user';
 import { Utils, apiKind } from '../shared/utils';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({ providedIn: 'root' })
 export class UserService
 {
   apiUrlRead = Utils.getApiUrl('user', apiKind.read);
+  currentUserId: number = null;
+  currentUser: User = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private cookieService: CookieService) { }
 
   getUsers(): Observable<User[]>
   {
@@ -26,6 +29,43 @@ export class UserService
       map((climbers: User[]) => climbers.find(p => p.id === id))
     );
   }
+
+  getCurrentUserId(): number
+  {
+    if (!this.currentUserId)
+    {
+      let value: string = this.cookieService.get("userId");
+      if (value)
+      {
+        this.currentUserId = parseInt(value);
+        this.updateCurrentUser();
+      }
+    }
+
+    return this.currentUserId;
+  }
+
+  setCurrentUserId(userId: number)
+  {
+    this.currentUserId = userId;
+    this.updateCurrentUser();
+  }
+
+  private updateCurrentUser()
+  {
+    if (this.currentUserId)
+    {
+      this.getUser(this.currentUserId).subscribe
+        (
+          user => this.currentUser = user,
+          error => console.log(error)
+        );
+    }
+    else
+      this.currentUser = null;
+  }
+
+  getCurrentUser(): User { return this.currentUser; }
 
   private handleError(err: HttpErrorResponse)
   {

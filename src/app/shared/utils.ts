@@ -1,5 +1,3 @@
-import { User } from '../user/user';
-
 export enum apiKind { read = "read", create = "create", update = "update", delete = "delete" }
 
 export class Utils
@@ -14,11 +12,6 @@ export class Utils
       default: return null;
     }
   }
-
-  private static theUser: User /*= { id: 1, firstName: "TEST", lastName: "USER", gender: "M" }*/;//TMP
-  static setUser(user: User) { Utils.theUser = user; }
-  static getUser(): User { return Utils.theUser; }
-  static getUserId(): number { return Utils.theUser != null ? Utils.theUser.id : null; }
 
   static getApiUrl(apiName: string, kind: apiKind ): string
   {

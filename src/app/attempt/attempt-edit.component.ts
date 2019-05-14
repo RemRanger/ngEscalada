@@ -9,6 +9,7 @@ import { Session } from '../session/session';
 import { NgForm } from '@angular/forms';
 import { Location } from '@angular/common';
 import { Utils } from '../shared/utils';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'app-attempt-edit',
@@ -24,7 +25,7 @@ export class AttemptEditComponent implements OnInit
   percentages: number[] = [];
   response: any;
 
-  constructor(private location: Location, private route: ActivatedRoute, private attemptService: AttemptService, private sessionService: SessionService, private routeService: RouteService)
+  constructor(private location: Location, private route: ActivatedRoute, private attemptService: AttemptService, private sessionService: SessionService, private userService: UserService, private routeService: RouteService)
   {
     const paramId = this.route.snapshot.paramMap.get('id');
     if (paramId)
@@ -73,7 +74,7 @@ export class AttemptEditComponent implements OnInit
                 this.attempt.sessionDate = this.session.date;
                 this.attempt.locationId = this.session.locationId;
                 this.attempt.locationName = this.session.locationName;
-                this.attempt.userId = Utils.getUserId();
+                this.attempt.userId = this.userService.getCurrentUserId();
                 this.attempt.result = 0;
                 this.attempt.percentage = 0;
               },

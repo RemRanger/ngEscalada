@@ -3,6 +3,7 @@ import { Session } from './session';
 import { SessionService } from './session.service';
 import { Utils } from '../shared/utils';
 import { Router } from '@angular/router';
+import { UserService } from '../user/user.service';
 
 @Component({
   templateUrl: './session-list.component.html',
@@ -14,17 +15,20 @@ export class SessionListComponent implements OnInit
   errorMessage = '';
   userId: number;
 
-  constructor(private sessionService: SessionService, private router: Router) { }
+  constructor(private sessionService: SessionService, private userService: UserService, private router: Router) { }
 
   ngOnInit()
   {
-    this.userId = Utils.getUserId();
-    this.sessionService.getSessions(this.userId).subscribe
-      (
-        sessions => this.sessions = sessions,
-        error => this.errorMessage = <any>error
-      );
-
+    this.userId = this.userService.getCurrentUserId();
+    console.log("Session list's user Id: ", this.userId);
+    if (this.userId)
+    {
+      this.sessionService.getSessions(this.userId).subscribe
+        (
+          sessions => this.sessions = sessions,
+          error => this.errorMessage = <any>error
+        );
+    }
   }
 
   getApiUrl(): string { return this.sessionService.apiUrlRead; }

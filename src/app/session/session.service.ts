@@ -75,7 +75,7 @@ export class SessionService
       body.append('id', session.id.toString());
       return this.http.post<any>(this.apiUrlUpdate, body).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          tap(data => console.log('Update session: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }
@@ -83,7 +83,7 @@ export class SessionService
     {
       return this.http.post<any>(this.apiUrlCreate, body).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          tap(data => console.log('Create session: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }
@@ -100,7 +100,7 @@ export class SessionService
 
       return this.http.post<any>(this.apiUrlDelete, body).pipe
         (
-          tap(data => console.log('All: ' + JSON.stringify(data))),
+          tap(data => console.log('Delete session: ' + JSON.stringify(data))),
           catchError(this.handleError)
         );
     }
