@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { UserModule } from './user/user.module';
 import { LocationModule } from './location/location.module';
 import { AboutComponent } from './home/about.component';
@@ -14,12 +14,30 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { SessionModule } from './session/session.module';
 import { AttemptModule } from './attempt/attempt.module';
 import { ActivityListComponent } from './home/activity-list.component';
-import { LoginModule } from './login/login.module';
+///import { LoginModule } from './login/login.module';
 import { SharedModule } from './shared/shared.module';
+import { OktaAuthModule, OktaCallbackComponent, OktaAuthGuard } from '@okta/okta-angular';
+import { ProtectedComponent } from './protected.component';
+import { LoginComponent } from './login.component';
+
+const config =
+{
+  issuer: 'https://dev-102130.okta.com/oauth2/default',
+  redirectUri: 'http://localhost:4200/implicit/callback',
+  clientId: '0oal4z2xmms2rVOhX356'
+}
+
+export function onAuthRequired({ oktaAuth, router })
+{
+  // Redirect the user to your custom login page
+  router.navigate(['/login']);
+}
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    ProtectedComponent,
     HomeComponent,
     AboutComponent,
     ActivityListComponent
@@ -31,15 +49,19 @@ import { SharedModule } from './shared/shared.module';
     FormsModule,
     RouterModule.forRoot
       ([
-        { path: 'home', component: HomeComponent},
+        { path: 'home', component: HomeComponent },
         { path: 'about', component: AboutComponent },
+        { path: 'implicit/callback', component: OktaCallbackComponent },
+        { path: 'login', component: LoginComponent },
+        { path: 'protected', component: ProtectedComponent, canActivate: [OktaAuthGuard], data: { onAuthRequired } },
         { path: '', redirectTo: 'home', pathMatch: 'full' },
         { path: '**', redirectTo: 'home', pathMatch: 'full' }
       ]),
+    OktaAuthModule.initAuth(config),
     SharedModule,
     LocationModule,
     UserModule,
-    LoginModule,
+    //LoginModule,
     SessionModule,
     AttemptModule
   ],

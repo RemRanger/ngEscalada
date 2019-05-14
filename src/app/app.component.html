@@ -9,9 +9,10 @@
     <li><a routerLinkActive='active' [routerLink]="['/locations']">Locations</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/climbers']">Climbers</a></li>
     <li><a routerLinkActive='active' [routerLink]="['/about']">About</a></li>
-    <li *ngIf="getUser() == null"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>
-    <li *ngIf="getUser() != null"><a routerLinkActive='active' [routerLink]="&nbsp;['/sessions']">My sessions</a></li>
-    <li *ngIf="getUser() != null"><a href="" ng-click="logout()">Logout {{getUser().firstName}}</a></li>
+    <!--<li *ngIf="!isAuthenticated"><a routerLinkActive='active' [routerLink]="['/login']">Login</a></li>-->
+    <li *ngIf="!isAuthenticated"><a routerLink="/login">Login</a></li>
+    <li *ngIf="isAuthenticated"><a routerLinkActive='active' [routerLink]="&nbsp;['/sessions']">My sessions</a></li>
+    <li *ngIf="isAuthenticated"><a href="" (click)="logout()">Logout {{userName}}</a></li>
   </ul>
 
   <router-outlet></router-outlet>
