@@ -25,7 +25,7 @@ export class AppComponent
 
   logout()
   {
-    this.cookieService.set("userId", null);
+    this.cookieService.delete("userId");
     this.userService.setCurrentUserId(null);
   }
 }

@@ -3,12 +3,11 @@ import { NgForm } from '@angular/forms';
 import { LoginService } from './login.service';
 import { Login } from './login';
 import { User } from '../user/user';
-import { Utils } from '../shared/utils';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../user/user.service';
 
-const loginExpiry = 15 / (24 * 60); // 15 minutes;  
+const loginExpiry = 1 / 12 /*15*/  / (24 * 60); // 15 minutes;  
 
 @Component({
   selector: 'app-login',
