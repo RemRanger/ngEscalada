@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Utils } from '../shared/utils';
 import { AttemptService } from '../attempt/attempt.service';
 import { Attempt, AttemptGroup } from '../attempt/attempt';
+import { UserService } from '../user/user.service';
 
 @Component({
   selector: 'esc-activity-list',
@@ -13,7 +14,7 @@ export class ActivityListComponent implements OnInit
   attempts: Attempt[];
   errorMessage = '';
 
-  constructor(private attemptService: AttemptService) { }
+  constructor(private attemptService: AttemptService, private userService: UserService) { }
 
   ngOnInit()
   {
@@ -50,4 +51,6 @@ export class ActivityListComponent implements OnInit
   getResultPic(result: number): string { return Utils.getResultPic(result); }
 
   getApiUrl(): string { return this.attemptService.apiUrlRead; }
+
+  getCurrentUserId(): number { return this.userService.getCurrentUserId(); }
 }
