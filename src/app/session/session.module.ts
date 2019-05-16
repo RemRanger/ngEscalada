@@ -3,13 +3,11 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { SessionListComponent } from './session-list.component';
 import { SessionDetailComponent } from './session-detail.component';
-import { SessionDetailGuard } from './session-detail.guard';
 import { AttemptModule } from '../attempt/attempt.module';
 import { SessionEditComponent } from './session-edit.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { SessionDeleteComponent } from './session-delete.component';
-import { SessionListGuard } from './session-list.guard';
 import { LoggedInGuard } from '../shared/logged-in.guard';
 
 @NgModule({
