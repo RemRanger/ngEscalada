@@ -11,11 +11,12 @@ import { Location } from '@angular/common';
 import { Utils } from '../shared/utils';
 import { UserService } from '../user/user.service';
 
-@Component({
-  selector: 'app-attempt-edit',
-  templateUrl: './attempt-edit.component.html',
-  styleUrls: ['./attempt-edit.component.css']
-})
+@Component(
+  {
+    selector: 'app-attempt-edit',
+    templateUrl: './attempt-edit.component.html',
+    styleUrls: ['./attempt-edit.component.css']
+  })
 export class AttemptEditComponent implements OnInit
 {
   attempt: Attempt;
@@ -38,10 +39,17 @@ export class AttemptEditComponent implements OnInit
             attempts =>
             {
               this.attempt = attempts[0];
-              this.routeService.getRoutes(this.attempt.locationId).subscribe
+              this.sessionService.getSingleSession(this.attempt.sessionId).subscribe
                 (
-                  routes => this.routes = routes,
-                  error => this.errorMessage = <any>error
+                  sessions =>
+                  {
+                    this.session = sessions[0];
+                    this.routeService.getRoutes(this.attempt.locationId).subscribe
+                      (
+                        routes => this.routes = routes.filter(r => r.dateFrom <= this.session.date && (r.dateUntil == null || r.dateUntil >= this.session.date)),
+                        error => this.errorMessage = <any>error
+                      );
+                  }
                 );
             },
             error => this.errorMessage = <any>error
@@ -65,7 +73,7 @@ export class AttemptEditComponent implements OnInit
                 console.log("Session's locationId:", this.session.locationId);
                 this.routeService.getRoutes(this.session.locationId).subscribe
                   (
-                    routes => this.routes = routes,
+                    routes => this.routes = routes.filter(r => r.dateFrom <= this.session.date && (r.dateUntil == null || r.dateUntil >= this.session.date)),
                     error => this.errorMessage = <any>error
                   );
 
