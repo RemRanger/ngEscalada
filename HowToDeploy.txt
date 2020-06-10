@@ -1,0 +1,3 @@
+Include root subfolder, like so:
+
+ng build --prod --base-href=/ng-escalada/
